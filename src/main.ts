@@ -8,9 +8,15 @@ import { ms, StringValue } from './shared/utils/ms.util'
 import { RedisStore } from 'connect-redis'
 import * as session from 'express-session'
 import { parseBoolean } from './shared/utils/parse-boolean.util'
+import { graphqlUploadExpress } from 'graphql-upload-ts'
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
+
+	app.use(
+		'/graphql',
+		graphqlUploadExpress({ maxFileSize: 100000000, maxFiles: 10 })
+	)
 
 	const config = app.get(ConfigService)
 	const redis = new IORedis({

@@ -155,12 +155,21 @@ type User {
   _count: UserCount!
 }
 
+type UploadedFile {
+  filename: String!
+  url: String!
+}
+
 type Query {
   getProfile: User!
 }
 
 type Mutation {
+  uploadFile(file: Upload!): UploadedFile!
   register(name: String!, email: String!, password: String!): User!
   login(email: String!, password: String!): User!
   logout: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

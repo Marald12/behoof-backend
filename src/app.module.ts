@@ -7,6 +7,8 @@ import { PrismaModule } from './prisma/prisma.module'
 import { ConfigModule } from '@nestjs/config'
 import { AuthModule } from './auth/auth.module'
 import * as process from 'node:process'
+import { MediaResolver } from './media/media.resolver'
+import { ServeStaticModule } from '@nestjs/serve-static'
 
 @Module({
 	imports: [
@@ -20,10 +22,14 @@ import * as process from 'node:process'
 			envFilePath: '.env',
 			isGlobal: true
 		}),
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, '..', 'uploads'),
+			serveRoot: '/uploads'
+		}),
 		UserModule,
 		PrismaModule,
 		AuthModule
 	],
-	providers: []
+	providers: [MediaResolver]
 })
 export class AppModule {}
