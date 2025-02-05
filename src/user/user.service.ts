@@ -15,7 +15,9 @@ export class UserService {
 			where: { email }
 		})
 		if (user)
-			throw new BadRequestException('Пользователь с таким email уже существует')
+			throw new BadRequestException(
+				'Пользователь с таким email уже существует.'
+			)
 
 		return this.prismaService.user.create({
 			data: {
@@ -26,12 +28,21 @@ export class UserService {
 		})
 	}
 
-	async findUserByEmail(email: string) {
+	async findByEmail(email: string) {
 		const user = await this.prismaService.user.findUnique({
 			where: { email }
 		})
 		if (!user)
-			throw new BadRequestException('Пользователь с таким email не найден')
+			throw new BadRequestException('Пользователь с таким email не найден.')
+
+		return user
+	}
+
+	async findById(id: string) {
+		const user = await this.prismaService.user.findUnique({
+			where: { id }
+		})
+		if (!user) throw new BadRequestException('Пользователь не найден.')
 
 		return user
 	}

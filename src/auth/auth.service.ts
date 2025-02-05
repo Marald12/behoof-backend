@@ -24,7 +24,7 @@ export class AuthService {
 	}
 
 	async login(req: Request, email: string, password: string) {
-		const user = await this.userService.findUserByEmail(email)
+		const user = await this.userService.findByEmail(email)
 
 		if (req.session.userId)
 			throw new BadRequestException('Вы уже авторизованы.')
