@@ -1,8 +1,9 @@
-import { Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UserService } from './user.service'
 import { User } from '../shared/prismagraphql/user'
 import { Auth } from '../auth/auth.decorator'
 import { CurrentUser } from './user.decorator'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 @Resolver()
 export class UserResolver {
@@ -10,7 +11,16 @@ export class UserResolver {
 
 	@Query(() => User)
 	@Auth()
-	getProfile(@CurrentUser() userId: string) {
+	public getProfile(@CurrentUser() userId: string) {
 		return this.userService.findById(userId)
+	}
+
+	@Mutation(() => User)
+	@Auth()
+	public updateUser(
+		@CurrentUser() userId: string,
+		@Args('body') body: UpdateUserDto
+	) {
+		return this.userService.updateUser(userId, body)
 	}
 }

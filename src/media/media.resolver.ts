@@ -5,7 +5,7 @@ import { UploadedFile } from './media.model'
 @Resolver()
 export class MediaResolver {
 	@Mutation(() => UploadedFile)
-	async uploadFile(
+	public async uploadFile(
 		@Args('file', { type: () => GraphQLUpload }) file: FileUpload
 	): Promise<UploadedFile> {
 		const { createReadStream, filename } = file

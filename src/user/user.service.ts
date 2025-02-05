@@ -1,18 +1,16 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { hash } from 'argon2'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { CreateUserDto } from './dto/create-user.dto'
 
 @Injectable()
 export class UserService {
 	constructor(private readonly prismaService: PrismaService) {}
 
-	async findAll() {
-		return this.prismaService.user.findMany()
-	}
-
-	async createUser(name: string, email: string, password: string) {
+	public async createUser(body: CreateUserDto) {
 		const user = await this.prismaService.user.findUnique({
-			where: { email }
+			where: { email: body.email }
 		})
 		if (user)
 			throw new BadRequestException(
@@ -21,14 +19,13 @@ export class UserService {
 
 		return this.prismaService.user.create({
 			data: {
-				name,
-				email,
-				password: await hash(password)
+				...body,
+				password: await hash(body.password)
 			}
 		})
 	}
 
-	async findByEmail(email: string) {
+	public async findByEmail(email: string) {
 		const user = await this.prismaService.user.findUnique({
 			where: { email }
 		})
@@ -38,7 +35,7 @@ export class UserService {
 		return user
 	}
 
-	async findById(id: string) {
+	public async findById(id: string) {
 		const user = await this.prismaService.user.findUnique({
 			where: { id }
 		})
@@ -47,9 +44,18 @@ export class UserService {
 		return user
 	}
 
-	async findByIdNoValid(id: string) {
+	public async findByIdNoValid(id: string) {
 		return this.prismaService.user.findUnique({
 			where: { id }
+		})
+	}
+
+	public async updateUser(id: string, dto: UpdateUserDto) {
+		await this.findById(id) // Проверка на существование пользователя
+
+		return this.prismaService.user.update({
+			where: { id },
+			data: dto
 		})
 	}
 }

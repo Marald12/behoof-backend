@@ -9,6 +9,8 @@ import { User } from '../shared/prismagraphql/user'
 import { Request, Response } from 'express'
 import { verify } from 'argon2'
 import { ConfigService } from '@nestjs/config'
+import { CreateUserDto } from '../user/dto/create-user.dto'
+import { AuthDto } from './auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -17,19 +19,19 @@ export class AuthService {
 		private readonly configService: ConfigService
 	) {}
 
-	async register(req: Request, name: string, email: string, password: string) {
-		const user = await this.userService.createUser(name, email, password)
+	public async register(req: Request, body: CreateUserDto) {
+		const user = await this.userService.createUser({ ...body })
 
 		return await this.saveSession(req, user)
 	}
 
-	async login(req: Request, email: string, password: string) {
-		const user = await this.userService.findByEmail(email)
+	public async login(req: Request, dto: AuthDto) {
+		const user = await this.userService.findByEmail(dto.email)
 
 		if (req.session.userId)
 			throw new BadRequestException('Вы уже авторизованы.')
 
-		const isValidPassword = await verify(user.password, password)
+		const isValidPassword = await verify(user.password, dto.password)
 		if (!isValidPassword) {
 			throw new UnauthorizedException('Неверный логин или пароль.')
 		}
@@ -37,7 +39,7 @@ export class AuthService {
 		return await this.saveSession(req, user)
 	}
 
-	async logout(req: Request, res: Response): Promise<string> {
+	public async logout(req: Request, res: Response): Promise<string> {
 		return new Promise((resolve, reject) => {
 			if (!req.session.userId)
 				return reject(
