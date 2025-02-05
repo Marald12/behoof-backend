@@ -15,6 +15,15 @@ export class UserCountAggregate {
     password!: number;
 
     @Field(() => Int, {nullable:false})
+    name!: number;
+
+    @Field(() => Int, {nullable:false})
+    country!: number;
+
+    @Field(() => Int, {nullable:false})
+    city!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

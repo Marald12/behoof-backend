@@ -8,13 +8,4 @@ export class UserService {
 	async findAll() {
 		return this.prismaService.user.findMany()
 	}
-
-	async createUser(email: string, password: string) {
-		return this.prismaService.user.create({
-			data: {
-				email,
-				password
-			}
-		})
-	}
 }

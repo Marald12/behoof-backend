@@ -6,6 +6,9 @@ type UserCountAggregate {
   id: Int!
   email: Int!
   password: Int!
+  name: Int!
+  country: Int!
+  city: Int!
   createdAt: Int!
   updatedAt: Int!
   _all: Int!
@@ -15,6 +18,9 @@ type UserMinAggregate {
   id: String
   email: String
   password: String
+  name: String
+  country: String
+  city: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -28,23 +34,128 @@ type UserMaxAggregate {
   id: String
   email: String
   password: String
+  name: String
+  country: String
+  city: String
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+type UserCount {
+  questions: Int!
+  reviews: Int!
+  favoriteProducts: Int!
+}
+
+type Question {
+  id: ID!
+  userId: String!
+  question: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+}
+
+type ColorCount {
+  products: Int!
+}
+
+type Color {
+  id: ID!
+  color: String!
+  products: [Product!]
+  _count: ColorCount!
+}
+
+type CategoryCount {
+  products: Int!
+  brands: Int!
+}
+
+type Category {
+  id: ID!
+  title: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  products: [Product!]
+  brands: [Brand!]
+  _count: CategoryCount!
+}
+
+type BrandCount {
+  products: Int!
+}
+
+type Brand {
+  id: ID!
+  title: String!
+  categoryId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  category: Category!
+  products: [Product!]
+  _count: BrandCount!
+}
+
+type ProductCount {
+  colors: Int!
+  reviews: Int!
+  usersFavorite: Int!
+}
+
+type Product {
+  id: ID!
+  title: String!
+  description: String!
+  rating: Int!
+  price: Int!
+  images: [String!]
+  characteristics: JSON!
+  brandId: String!
+  categoryId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  colors: [Color!]
+  brand: Brand!
+  category: Category!
+  reviews: [Review!]
+  usersFavorite: [User!]
+  _count: ProductCount!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Review {
+  id: ID!
+  userId: String!
+  productId: String!
+  message: String!
+  starsCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+  product: Product!
 }
 
 type User {
   id: ID!
   email: String!
   password: String!
+  name: String!
+  country: String!
+  city: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  questions: [Question!]
+  reviews: [Review!]
+  favoriteProducts: [Product!]
+  _count: UserCount!
 }
 
 type Query {
   getHello: String!
   findUsers: [User!]!
-}
-
-type Mutation {
-  createUser(email: String!, password: String!): User!
 }

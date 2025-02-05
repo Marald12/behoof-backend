@@ -15,6 +15,15 @@ export class UserMinOrderByAggregateInput {
     password?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})
+    name?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    country?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    city?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})

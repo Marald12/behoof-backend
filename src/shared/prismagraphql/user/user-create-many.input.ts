@@ -13,6 +13,15 @@ export class UserCreateManyInput {
     @Field(() => String, {nullable:false})
     password!: string;
 
+    @Field(() => String, {nullable:false})
+    name!: string;
+
+    @Field(() => String, {nullable:false})
+    country!: string;
+
+    @Field(() => String, {nullable:false})
+    city!: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

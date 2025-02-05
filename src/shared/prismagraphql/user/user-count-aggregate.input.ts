@@ -14,6 +14,15 @@ export class UserCountAggregateInput {
     password?: true;
 
     @Field(() => Boolean, {nullable:true})
+    name?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    country?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    city?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})
