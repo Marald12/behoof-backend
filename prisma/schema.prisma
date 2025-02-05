@@ -19,8 +19,9 @@ model User {
   email    String @unique
   password String
   name     String
-  country  String
-  city     String
+
+  country String @default("")
+  city    String @default("")
 
   questions Question[]
   reviews   Review[]

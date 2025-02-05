@@ -159,3 +159,7 @@ type Query {
   getHello: String!
   findUsers: [User!]!
 }
+
+type Mutation {
+  register(name: String!, email: String!, password: String!): User!
+}

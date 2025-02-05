@@ -21,10 +21,10 @@ export class User {
     @Field(() => String, {nullable:false})
     name!: string;
 
-    @Field(() => String, {nullable:false})
+    @Field(() => String, {defaultValue:'',nullable:false})
     country!: string;
 
-    @Field(() => String, {nullable:false})
+    @Field(() => String, {defaultValue:'',nullable:false})
     city!: string;
 
     @Field(() => Date, {nullable:false})

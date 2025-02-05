@@ -18,11 +18,11 @@ export class UserCreateWithoutQuestionsInput {
     @Field(() => String, {nullable:false})
     name!: string;
 
-    @Field(() => String, {nullable:false})
-    country!: string;
+    @Field(() => String, {nullable:true})
+    country?: string;
 
-    @Field(() => String, {nullable:false})
-    city!: string;
+    @Field(() => String, {nullable:true})
+    city?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
