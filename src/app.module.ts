@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common'
-import { AppResolver } from './app.resolver'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { UserModule } from './user/user.module'
 import { PrismaModule } from './prisma/prisma.module'
-import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
 import { AuthModule } from './auth/auth.module'
 import * as process from 'node:process'
@@ -16,7 +14,7 @@ import * as process from 'node:process'
 			driver: ApolloDriver,
 			playground: process.env.NODE_ENV === 'development',
 			autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-			context: ({ req }) => ({ request: req })
+			context: ({ req, res }) => ({ req, res })
 		}),
 		ConfigModule.forRoot({
 			envFilePath: '.env',
@@ -26,6 +24,6 @@ import * as process from 'node:process'
 		PrismaModule,
 		AuthModule
 	],
-	providers: [AppResolver, AppService]
+	providers: []
 })
 export class AppModule {}

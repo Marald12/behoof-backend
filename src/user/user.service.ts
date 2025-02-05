@@ -25,4 +25,20 @@ export class UserService {
 			}
 		})
 	}
+
+	async findUserByEmail(email: string) {
+		const user = await this.prismaService.user.findUnique({
+			where: { email }
+		})
+		if (!user)
+			throw new BadRequestException('Пользователь с таким email не найден')
+
+		return user
+	}
+
+	async findByIdNoValid(id: string) {
+		return this.prismaService.user.findUnique({
+			where: { id }
+		})
+	}
 }
