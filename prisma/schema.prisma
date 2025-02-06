@@ -50,6 +50,8 @@ model Product {
   categoryId String
   reviews    Review[]
 
+  //TODO: Добавить счетчик паросмотров views
+
   usersFavorite User[] @relation("UserFavorites")
 
   createdAt DateTime @default(now()) @map("created_at")

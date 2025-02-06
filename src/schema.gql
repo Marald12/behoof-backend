@@ -160,8 +160,59 @@ type UploadedFile {
   url: String!
 }
 
+type CategoryCountAggregate {
+  id: Int!
+  title: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type CategoryMinAggregate {
+  id: String
+  title: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CategoryMaxAggregate {
+  id: String
+  title: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BrandCountAggregate {
+  id: Int!
+  title: Int!
+  categoryId: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type BrandMinAggregate {
+  id: String
+  title: String
+  categoryId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BrandMaxAggregate {
+  id: String
+  title: String
+  categoryId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
 type Query {
   getProfile: User!
+  findAllCategories: [Category!]!
+  findByIdCategory(id: String!): Category!
+  findAllBrands: [Brand!]!
+  findBrandById(id: String!): Brand!
 }
 
 type Mutation {
@@ -170,6 +221,8 @@ type Mutation {
   register(body: CreateUserDto!): User!
   login(body: AuthDto!): User!
   logout: String!
+  createCategory(body: CategoryDto!): Category!
+  createBrand(body: BrandDto!): Brand!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -190,4 +243,13 @@ input CreateUserDto {
 input AuthDto {
   email: String!
   password: String!
+}
+
+input CategoryDto {
+  title: String!
+}
+
+input BrandDto {
+  title: String!
+  categoryId: String!
 }

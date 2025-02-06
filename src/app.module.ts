@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module'
 import * as process from 'node:process'
 import { MediaResolver } from './media/media.resolver'
 import { ServeStaticModule } from '@nestjs/serve-static'
+import { CategoryModule } from './category/category.module';
+import { BrandModule } from './brand/brand.module';
 
 @Module({
 	imports: [
@@ -28,7 +30,9 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 		}),
 		UserModule,
 		PrismaModule,
-		AuthModule
+		AuthModule,
+		CategoryModule,
+		BrandModule
 	],
 	providers: [MediaResolver]
 })
