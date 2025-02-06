@@ -37,7 +37,11 @@ export class UserService {
 
 	public async findById(id: string) {
 		const user = await this.prismaService.user.findUnique({
-			where: { id }
+			where: { id },
+			include: {
+				questions: true,
+				reviews: true
+			}
 		})
 		if (!user) throw new BadRequestException('Пользователь не найден.')
 

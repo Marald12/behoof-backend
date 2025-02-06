@@ -13,6 +13,8 @@ import { CategoryModule } from './category/category.module';
 import { BrandModule } from './brand/brand.module';
 import { ProductModule } from './product/product.module';
 import { ColorModule } from './color/color.module';
+import { ReviewModule } from './review/review.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
 	imports: [
@@ -36,7 +38,9 @@ import { ColorModule } from './color/color.module';
 		CategoryModule,
 		BrandModule,
 		ProductModule,
-		ColorModule
+		ColorModule,
+		ReviewModule,
+		QuestionModule
 	],
 	providers: [MediaResolver]
 })

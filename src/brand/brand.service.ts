@@ -6,25 +6,10 @@ import { BrandDto } from './brand.dto'
 export class BrandService {
 	constructor(private readonly prismaService: PrismaService) {}
 
-	public async create(dto: BrandDto) {
-		const brand = await this.prismaService.brand.create({
-			data: dto
+	public async create({ title, categoryId }: BrandDto) {
+		return this.prismaService.brand.create({
+			data: { title, category: { connect: { id: categoryId } } }
 		})
-
-		await this.prismaService.category.update({
-			where: {
-				id: dto.categoryId
-			},
-			data: {
-				brands: {
-					connect: {
-						id: brand.id
-					}
-				}
-			}
-		})
-
-		return brand
 	}
 
 	public async findAll() {

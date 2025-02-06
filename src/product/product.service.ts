@@ -38,7 +38,12 @@ export class ProductService {
 			include: {
 				brand: true,
 				category: true,
-				colors: true
+				colors: true,
+				reviews: {
+					include: {
+						user: true
+					}
+				}
 			}
 		})
 	}
@@ -51,7 +56,12 @@ export class ProductService {
 			include: {
 				brand: true,
 				category: true,
-				colors: true
+				colors: true,
+				reviews: {
+					include: {
+						user: true
+					}
+				}
 			}
 		})
 		if (!product) throw new NotFoundException('Продукт не найден.')
