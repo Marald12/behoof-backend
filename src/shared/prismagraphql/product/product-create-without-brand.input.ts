@@ -32,6 +32,9 @@ export class ProductCreateWithoutBrandInput {
     @Field(() => GraphQLJSON, {nullable:false})
     characteristics!: any;
 
+    @Field(() => Int, {nullable:true})
+    viewsCount?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -26,6 +26,9 @@ export class ProductMinAggregateInput {
     categoryId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    viewsCount?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

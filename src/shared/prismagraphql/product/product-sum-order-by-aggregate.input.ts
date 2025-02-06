@@ -10,4 +10,7 @@ export class ProductSumOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     price?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    viewsCount?: `${SortOrder}`;
 }

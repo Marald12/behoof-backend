@@ -33,6 +33,9 @@ export class ProductCountAggregate {
     categoryId!: number;
 
     @Field(() => Int, {nullable:false})
+    viewsCount!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

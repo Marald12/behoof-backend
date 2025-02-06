@@ -31,6 +31,9 @@ export class ProductCreateManyCategoryInput {
     @Field(() => String, {nullable:false})
     brandId!: string;
 
+    @Field(() => Int, {nullable:true})
+    viewsCount?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

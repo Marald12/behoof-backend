@@ -10,6 +10,7 @@ export enum ProductScalarFieldEnum {
     characteristics = "characteristics",
     brandId = "brandId",
     categoryId = "categoryId",
+    viewsCount = "viewsCount",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

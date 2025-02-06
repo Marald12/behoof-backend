@@ -37,6 +37,9 @@ export class ProductUncheckedCreateInput {
     @Field(() => String, {nullable:false})
     categoryId!: string;
 
+    @Field(() => Int, {nullable:true})
+    viewsCount?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

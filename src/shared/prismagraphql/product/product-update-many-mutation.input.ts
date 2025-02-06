@@ -30,6 +30,9 @@ export class ProductUpdateManyMutationInput {
     @Field(() => GraphQLJSON, {nullable:true})
     characteristics?: any;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    viewsCount?: IntFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 

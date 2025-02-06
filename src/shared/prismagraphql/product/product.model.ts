@@ -40,6 +40,9 @@ export class Product {
     @Field(() => String, {nullable:false})
     categoryId!: string;
 
+    @Field(() => Int, {defaultValue:0,nullable:false})
+    viewsCount!: number;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

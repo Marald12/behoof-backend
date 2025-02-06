@@ -38,6 +38,9 @@ export class ProductGroupBy {
     @Field(() => String, {nullable:false})
     categoryId!: string;
 
+    @Field(() => Int, {nullable:false})
+    viewsCount!: number;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

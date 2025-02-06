@@ -33,6 +33,9 @@ export class ProductUncheckedUpdateManyWithoutCategoryInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     brandId?: StringFieldUpdateOperationsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    viewsCount?: IntFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 

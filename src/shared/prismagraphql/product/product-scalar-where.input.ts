@@ -45,6 +45,9 @@ export class ProductScalarWhereInput {
     @Field(() => StringFilter, {nullable:true})
     categoryId?: StringFilter;
 
+    @Field(() => IntFilter, {nullable:true})
+    viewsCount?: IntFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 

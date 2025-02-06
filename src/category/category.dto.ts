@@ -8,5 +8,5 @@ export class CategoryDto {
 	@IsNotEmpty({ message: 'Название не может быть пустым.' })
 	@MinLength(3, { message: 'Минимальная длина названия 3 символа.' })
 	@MaxLength(50, { message: 'Максимальная длина названия 50 символов.' })
-	title: string
+	public readonly title: string
 }

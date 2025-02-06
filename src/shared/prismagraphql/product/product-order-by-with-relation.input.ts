@@ -38,6 +38,9 @@ export class ProductOrderByWithRelationInput {
     categoryId?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})
+    viewsCount?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})

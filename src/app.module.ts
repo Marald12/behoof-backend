@@ -11,6 +11,8 @@ import { MediaResolver } from './media/media.resolver'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { CategoryModule } from './category/category.module';
 import { BrandModule } from './brand/brand.module';
+import { ProductModule } from './product/product.module';
+import { ColorModule } from './color/color.module';
 
 @Module({
 	imports: [
@@ -32,7 +34,9 @@ import { BrandModule } from './brand/brand.module';
 		PrismaModule,
 		AuthModule,
 		CategoryModule,
-		BrandModule
+		BrandModule,
+		ProductModule,
+		ColorModule
 	],
 	providers: [MediaResolver]
 })
