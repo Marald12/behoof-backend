@@ -54,6 +54,11 @@ async function bootstrap() {
 		})
 	)
 
+	app.use((req, res, next) => {
+	  console.log('Current session:', req.session);
+	  next();
+	})
+	
 	app.enableCors({
 		origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),
 		credentials: true,
