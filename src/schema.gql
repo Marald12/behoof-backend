@@ -317,6 +317,31 @@ type ReviewMaxAggregate {
   updatedAt: DateTime
 }
 
+type QuestionCountAggregate {
+  id: Int!
+  userId: Int!
+  question: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type QuestionMinAggregate {
+  id: String
+  userId: String
+  question: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type QuestionMaxAggregate {
+  id: String
+  userId: String
+  question: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
 type Query {
   getProfile: User!
   findAllCategories: [Category!]!
@@ -329,6 +354,8 @@ type Query {
   findColorById(id: String!): Color!
   findAllReviews: [Review!]!
   findReviewById(id: String!): Review!
+  findAllQuestions: [Question!]!
+  findQuestionById(id: String!): Question!
 }
 
 type Mutation {
@@ -344,6 +371,7 @@ type Mutation {
   deleteProduct(id: String!): Product!
   createColor(body: ColorDto!): Color!
   createReview(dto: ReviewDto!): Review!
+  createQuestion(dto: QuestionDto!): Question!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -409,4 +437,8 @@ input ReviewDto {
   message: String!
   starsCount: Float!
   productId: String!
+}
+
+input QuestionDto {
+  question: String!
 }
