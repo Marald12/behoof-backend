@@ -22,7 +22,8 @@ async function bootstrap() {
 	const redis = new IORedis({
 		host: config.getOrThrow<string>('REDIS_HOST'),
 		password: config.getOrThrow<string>('REDIS_PASSWORD'),
-		port: config.getOrThrow<number>('REDIS_PORT')
+		port: config.getOrThrow<number>('REDIS_PORT'),
+		username: config.getOrThrow<string>('REDIS_USER')
 	})
 
 	app.use(cookieParser(config.getOrThrow<string>('COOKIES_SECRET')))
@@ -38,7 +39,7 @@ async function bootstrap() {
 		session({
 			secret: config.getOrThrow<string>('SESSION_SECRET'),
 			name: config.getOrThrow<string>('SESSION_NAME'),
-			resave: false,
+			resave: true,
 			saveUninitialized: false,
 			cookie: {
 				domain: config.getOrThrow<string>('SESSION_DOMAIN'),
@@ -54,14 +55,8 @@ async function bootstrap() {
 		})
 	)
 
-	app.use((req, res, next) => {
-	  console.log('Current session:', req.session);
-	  next();
-	})
-	
 	app.enableCors({
-		// origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),
-		origin: '*',
+		origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),
 		credentials: true,
 		exposedHeaders: ['set-cookie']
 	})
