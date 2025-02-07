@@ -28,6 +28,8 @@ export class AuthService {
 	public async login(req: Request, dto: AuthDto) {
 		const user = await this.userService.findByEmail(dto.email)
 
+		console.log(req.session)
+
 		if (req.session.userId)
 			throw new BadRequestException('Вы уже авторизованы.')
 
@@ -63,6 +65,8 @@ export class AuthService {
 	private async saveSession(req: Request, user: User) {
 		return new Promise((resolve, reject) => {
 			req.session.userId = user.id
+
+			console.log(req.session)
 
 			req.session.save(err => {
 				if (err) {
