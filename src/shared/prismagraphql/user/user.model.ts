@@ -3,6 +3,8 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Question } from '../question/question.model';
 import { Review } from '../review/review.model';
+import { Article } from '../article/article.model';
+import { Comment } from '../comment/comment.model';
 import { Product } from '../product/product.model';
 import { UserCount } from './user-count.output';
 
@@ -38,6 +40,12 @@ export class User {
 
     @Field(() => [Review], {nullable:true})
     reviews?: Array<Review>;
+
+    @Field(() => [Article], {nullable:true})
+    articles?: Array<Article>;
+
+    @Field(() => [Comment], {nullable:true})
+    comments?: Array<Comment>;
 
     @Field(() => [Product], {nullable:true})
     favoriteProducts?: Array<Product>;

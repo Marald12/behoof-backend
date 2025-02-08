@@ -44,6 +44,8 @@ type UserMaxAggregate {
 type UserCount {
   questions: Int!
   reviews: Int!
+  articles: Int!
+  comments: Int!
   favoriteProducts: Int!
 }
 
@@ -67,9 +69,56 @@ type Color {
   _count: ColorCount!
 }
 
+type ArticleContent {
+  id: ID!
+  title: String!
+  description: String!
+  images: [String!]
+  types: ArticleContentTypes!
+  articleId: String!
+  article: Article!
+}
+
+enum ArticleContentTypes {
+  LIST
+  TEXT
+}
+
+type Comment {
+  id: ID!
+  comment: String!
+  userId: String!
+  articleId: String!
+  user: User!
+  article: Article!
+}
+
+type ArticleCount {
+  content: Int!
+  comments: Int!
+}
+
+type Article {
+  id: ID!
+  title: String!
+  tags: [String!]
+  banner: String!
+  viewsCount: Int!
+  categoryId: String!
+  userId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  content: [ArticleContent!]
+  comments: [Comment!]
+  category: Category!
+  user: User!
+  _count: ArticleCount!
+}
+
 type CategoryCount {
   products: Int!
   brands: Int!
+  articles: Int!
 }
 
 type Category {
@@ -79,6 +128,7 @@ type Category {
   updatedAt: DateTime!
   products: [Product!]
   brands: [Brand!]
+  articles: [Article!]
   _count: CategoryCount!
 }
 
@@ -152,6 +202,8 @@ type User {
   updatedAt: DateTime!
   questions: [Question!]
   reviews: [Review!]
+  articles: [Article!]
+  comments: [Comment!]
   favoriteProducts: [Product!]
   _count: UserCount!
 }
@@ -350,6 +402,7 @@ type Query {
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!
   findProductById(id: String!): Product!
+  findPopularProducts: [Product!]!
   findAllColors: [Color!]!
   findColorById(id: String!): Color!
   findAllReviews: [Review!]!

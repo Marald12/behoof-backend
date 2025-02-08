@@ -5,6 +5,7 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { ProductListRelationFilter } from '../product/product-list-relation-filter.input';
 import { BrandListRelationFilter } from '../brand/brand-list-relation-filter.input';
+import { ArticleListRelationFilter } from '../article/article-list-relation-filter.input';
 
 @InputType()
 export class CategoryWhereUniqueInput {
@@ -35,4 +36,7 @@ export class CategoryWhereUniqueInput {
 
     @Field(() => BrandListRelationFilter, {nullable:true})
     brands?: BrandListRelationFilter;
+
+    @Field(() => ArticleListRelationFilter, {nullable:true})
+    articles?: ArticleListRelationFilter;
 }

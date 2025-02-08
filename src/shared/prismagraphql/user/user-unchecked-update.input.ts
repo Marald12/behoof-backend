@@ -4,6 +4,8 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { QuestionUncheckedUpdateManyWithoutUserNestedInput } from '../question/question-unchecked-update-many-without-user-nested.input';
 import { ReviewUncheckedUpdateManyWithoutUserNestedInput } from '../review/review-unchecked-update-many-without-user-nested.input';
+import { ArticleUncheckedUpdateManyWithoutUserNestedInput } from '../article/article-unchecked-update-many-without-user-nested.input';
+import { CommentUncheckedUpdateManyWithoutUserNestedInput } from '../comment/comment-unchecked-update-many-without-user-nested.input';
 import { ProductUncheckedUpdateManyWithoutUsersFavoriteNestedInput } from '../product/product-unchecked-update-many-without-users-favorite-nested.input';
 
 @InputType()
@@ -38,6 +40,12 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => ReviewUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput;
+
+    @Field(() => ArticleUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    articles?: ArticleUncheckedUpdateManyWithoutUserNestedInput;
+
+    @Field(() => CommentUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput;
 
     @Field(() => ProductUncheckedUpdateManyWithoutUsersFavoriteNestedInput, {nullable:true})
     favoriteProducts?: ProductUncheckedUpdateManyWithoutUsersFavoriteNestedInput;

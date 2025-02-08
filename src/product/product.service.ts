@@ -89,6 +89,15 @@ export class ProductService {
 		})
 	}
 
+	public async findPopularProducts() {
+		return this.prismaService.product.findMany({
+			orderBy: {
+				viewsCount: 'desc'
+			},
+			take: 10
+		})
+	}
+
 	public async update(id: string, dto: UpdateProductDto) {
 		return this.prismaService.product.update({
 			where: {

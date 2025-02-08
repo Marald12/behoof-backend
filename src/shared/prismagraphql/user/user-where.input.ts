@@ -4,6 +4,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { QuestionListRelationFilter } from '../question/question-list-relation-filter.input';
 import { ReviewListRelationFilter } from '../review/review-list-relation-filter.input';
+import { ArticleListRelationFilter } from '../article/article-list-relation-filter.input';
+import { CommentListRelationFilter } from '../comment/comment-list-relation-filter.input';
 import { ProductListRelationFilter } from '../product/product-list-relation-filter.input';
 
 @InputType()
@@ -47,6 +49,12 @@ export class UserWhereInput {
 
     @Field(() => ReviewListRelationFilter, {nullable:true})
     reviews?: ReviewListRelationFilter;
+
+    @Field(() => ArticleListRelationFilter, {nullable:true})
+    articles?: ArticleListRelationFilter;
+
+    @Field(() => CommentListRelationFilter, {nullable:true})
+    comments?: CommentListRelationFilter;
 
     @Field(() => ProductListRelationFilter, {nullable:true})
     favoriteProducts?: ProductListRelationFilter;

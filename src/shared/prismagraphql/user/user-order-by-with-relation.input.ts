@@ -3,6 +3,8 @@ import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
 import { QuestionOrderByRelationAggregateInput } from '../question/question-order-by-relation-aggregate.input';
 import { ReviewOrderByRelationAggregateInput } from '../review/review-order-by-relation-aggregate.input';
+import { ArticleOrderByRelationAggregateInput } from '../article/article-order-by-relation-aggregate.input';
+import { CommentOrderByRelationAggregateInput } from '../comment/comment-order-by-relation-aggregate.input';
 import { ProductOrderByRelationAggregateInput } from '../product/product-order-by-relation-aggregate.input';
 
 @InputType()
@@ -37,6 +39,12 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => ReviewOrderByRelationAggregateInput, {nullable:true})
     reviews?: ReviewOrderByRelationAggregateInput;
+
+    @Field(() => ArticleOrderByRelationAggregateInput, {nullable:true})
+    articles?: ArticleOrderByRelationAggregateInput;
+
+    @Field(() => CommentOrderByRelationAggregateInput, {nullable:true})
+    comments?: CommentOrderByRelationAggregateInput;
 
     @Field(() => ProductOrderByRelationAggregateInput, {nullable:true})
     favoriteProducts?: ProductOrderByRelationAggregateInput;

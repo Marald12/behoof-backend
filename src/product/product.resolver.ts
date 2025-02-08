@@ -23,6 +23,11 @@ export class ProductResolver {
 		return this.productService.findById(id)
 	}
 
+	@Query(() => [Product])
+	public findPopularProducts() {
+		return this.productService.findPopularProducts()
+	}
+
 	@Mutation(() => Product)
 	public updateProduct(
 		@Args('id') id: string,

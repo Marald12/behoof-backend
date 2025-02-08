@@ -15,6 +15,9 @@ import { ProductModule } from './product/product.module';
 import { ColorModule } from './color/color.module';
 import { ReviewModule } from './review/review.module';
 import { QuestionModule } from './question/question.module';
+import { ArticleContentModule } from './article-content/article-content.module';
+import { ArticleModule } from './article/article.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
 	imports: [
@@ -40,7 +43,10 @@ import { QuestionModule } from './question/question.module';
 		ProductModule,
 		ColorModule,
 		ReviewModule,
-		QuestionModule
+		QuestionModule,
+		ArticleContentModule,
+		ArticleModule,
+		CommentModule
 	],
 	providers: [MediaResolver]
 })

@@ -4,6 +4,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { ProductUpdateManyWithoutCategoryNestedInput } from '../product/product-update-many-without-category-nested.input';
 import { BrandUpdateManyWithoutCategoryNestedInput } from '../brand/brand-update-many-without-category-nested.input';
+import { ArticleUpdateManyWithoutCategoryNestedInput } from '../article/article-update-many-without-category-nested.input';
 
 @InputType()
 export class CategoryUpdateInput {
@@ -25,4 +26,7 @@ export class CategoryUpdateInput {
 
     @Field(() => BrandUpdateManyWithoutCategoryNestedInput, {nullable:true})
     brands?: BrandUpdateManyWithoutCategoryNestedInput;
+
+    @Field(() => ArticleUpdateManyWithoutCategoryNestedInput, {nullable:true})
+    articles?: ArticleUpdateManyWithoutCategoryNestedInput;
 }

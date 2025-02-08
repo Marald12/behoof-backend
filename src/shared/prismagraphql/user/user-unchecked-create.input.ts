@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { QuestionUncheckedCreateNestedManyWithoutUserInput } from '../question/question-unchecked-create-nested-many-without-user.input';
 import { ReviewUncheckedCreateNestedManyWithoutUserInput } from '../review/review-unchecked-create-nested-many-without-user.input';
+import { ArticleUncheckedCreateNestedManyWithoutUserInput } from '../article/article-unchecked-create-nested-many-without-user.input';
+import { CommentUncheckedCreateNestedManyWithoutUserInput } from '../comment/comment-unchecked-create-nested-many-without-user.input';
 import { ProductUncheckedCreateNestedManyWithoutUsersFavoriteInput } from '../product/product-unchecked-create-nested-many-without-users-favorite.input';
 
 @InputType()
@@ -36,6 +38,12 @@ export class UserUncheckedCreateInput {
 
     @Field(() => ReviewUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => ArticleUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    articles?: ArticleUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => CommentUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => ProductUncheckedCreateNestedManyWithoutUsersFavoriteInput, {nullable:true})
     favoriteProducts?: ProductUncheckedCreateNestedManyWithoutUsersFavoriteInput;

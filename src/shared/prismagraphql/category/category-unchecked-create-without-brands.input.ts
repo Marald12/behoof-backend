@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { ProductUncheckedCreateNestedManyWithoutCategoryInput } from '../product/product-unchecked-create-nested-many-without-category.input';
+import { ArticleUncheckedCreateNestedManyWithoutCategoryInput } from '../article/article-unchecked-create-nested-many-without-category.input';
 
 @InputType()
 export class CategoryUncheckedCreateWithoutBrandsInput {
@@ -19,4 +20,7 @@ export class CategoryUncheckedCreateWithoutBrandsInput {
 
     @Field(() => ProductUncheckedCreateNestedManyWithoutCategoryInput, {nullable:true})
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput;
+
+    @Field(() => ArticleUncheckedCreateNestedManyWithoutCategoryInput, {nullable:true})
+    articles?: ArticleUncheckedCreateNestedManyWithoutCategoryInput;
 }

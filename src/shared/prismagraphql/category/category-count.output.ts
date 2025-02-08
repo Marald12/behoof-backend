@@ -10,4 +10,7 @@ export class CategoryCount {
 
     @Field(() => Int, {nullable:false})
     brands?: number;
+
+    @Field(() => Int, {nullable:false})
+    articles?: number;
 }

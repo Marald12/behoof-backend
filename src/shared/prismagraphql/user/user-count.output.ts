@@ -12,5 +12,11 @@ export class UserCount {
     reviews?: number;
 
     @Field(() => Int, {nullable:false})
+    articles?: number;
+
+    @Field(() => Int, {nullable:false})
+    comments?: number;
+
+    @Field(() => Int, {nullable:false})
     favoriteProducts?: number;
 }

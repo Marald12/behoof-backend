@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { BrandUpdateManyWithoutCategoryNestedInput } from '../brand/brand-update-many-without-category-nested.input';
+import { ArticleUpdateManyWithoutCategoryNestedInput } from '../article/article-update-many-without-category-nested.input';
 
 @InputType()
 export class CategoryUpdateWithoutProductsInput {
@@ -21,4 +22,7 @@ export class CategoryUpdateWithoutProductsInput {
 
     @Field(() => BrandUpdateManyWithoutCategoryNestedInput, {nullable:true})
     brands?: BrandUpdateManyWithoutCategoryNestedInput;
+
+    @Field(() => ArticleUpdateManyWithoutCategoryNestedInput, {nullable:true})
+    articles?: ArticleUpdateManyWithoutCategoryNestedInput;
 }

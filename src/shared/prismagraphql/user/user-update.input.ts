@@ -4,6 +4,8 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { QuestionUpdateManyWithoutUserNestedInput } from '../question/question-update-many-without-user-nested.input';
 import { ReviewUpdateManyWithoutUserNestedInput } from '../review/review-update-many-without-user-nested.input';
+import { ArticleUpdateManyWithoutUserNestedInput } from '../article/article-update-many-without-user-nested.input';
+import { CommentUpdateManyWithoutUserNestedInput } from '../comment/comment-update-many-without-user-nested.input';
 import { ProductUpdateManyWithoutUsersFavoriteNestedInput } from '../product/product-update-many-without-users-favorite-nested.input';
 
 @InputType()
@@ -38,6 +40,12 @@ export class UserUpdateInput {
 
     @Field(() => ReviewUpdateManyWithoutUserNestedInput, {nullable:true})
     reviews?: ReviewUpdateManyWithoutUserNestedInput;
+
+    @Field(() => ArticleUpdateManyWithoutUserNestedInput, {nullable:true})
+    articles?: ArticleUpdateManyWithoutUserNestedInput;
+
+    @Field(() => CommentUpdateManyWithoutUserNestedInput, {nullable:true})
+    comments?: CommentUpdateManyWithoutUserNestedInput;
 
     @Field(() => ProductUpdateManyWithoutUsersFavoriteNestedInput, {nullable:true})
     favoriteProducts?: ProductUpdateManyWithoutUsersFavoriteNestedInput;
