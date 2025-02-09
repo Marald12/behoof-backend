@@ -21,4 +21,9 @@ export class CategoryResolver {
 	public findByIdCategory(@Args('id') id: string) {
 		return this.categoryService.findOne(id)
 	}
+
+	@Query(() => [Category])
+	public getCategoriesForMenu() {
+		return this.categoryService.getForMenu()
+	}
 }

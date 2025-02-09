@@ -12,6 +12,9 @@ export class CategoryCreateWithoutArticlesInput {
     @Field(() => String, {nullable:false})
     title!: string;
 
+    @Field(() => String, {nullable:true})
+    banner?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

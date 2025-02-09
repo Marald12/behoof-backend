@@ -98,6 +98,47 @@ export class ProductService {
 		})
 	}
 
+	public async searchProducts(search: string) {
+		const products = await this.prismaService.product.findMany({
+			where: {
+				OR: [
+					{
+						title: {
+							contains: search,
+							mode: 'insensitive'
+						}
+					},
+					{
+						category: {
+							title: {
+								contains: search,
+								mode: 'insensitive'
+							}
+						}
+					},
+					{
+						brand: {
+							title: {
+								contains: search,
+								mode: 'insensitive'
+							}
+						}
+					}
+				]
+			},
+			include: {
+				category: true,
+				brand: true
+			},
+			take: 5,
+			orderBy: {
+				viewsCount: 'desc'
+			}
+		})
+
+		return search.length >= 1 ? products : []
+	}
+
 	public async update(id: string, dto: UpdateProductDto) {
 		return this.prismaService.product.update({
 			where: {

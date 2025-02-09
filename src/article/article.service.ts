@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { CreateArticleDto } from './dto/create-article.dto'
+import { ArticleWhereInput } from '../shared/prismagraphql/article'
 
 @Injectable()
 export class ArticleService {
@@ -21,14 +22,50 @@ export class ArticleService {
 		})
 	}
 
-	public async findAll() {
+	public async findAll(
+		take?: number,
+		skip?: number,
+		search?: string,
+		categoryId?: string,
+		tag?: string
+	) {
+		const whereConditions: ArticleWhereInput = {}
+
+		if (search) {
+			whereConditions.OR = [
+				{
+					title: {
+						contains: search,
+						mode: 'insensitive'
+					}
+				}
+			]
+		}
+
+		if (tag) {
+			whereConditions.OR = whereConditions.OR
+				? [...whereConditions.OR, { tags: { has: tag } }]
+				: [{ tags: { has: tag } }]
+		}
+
+		if (categoryId) {
+			whereConditions.category = { is: { id: { equals: categoryId } } }
+		}
+
 		return this.prismaService.article.findMany({
+			where: whereConditions,
 			include: {
 				content: true,
 				user: true,
 				category: true,
-				comments: true
-			}
+				comments: {
+					include: {
+						user: true
+					}
+				}
+			},
+			skip,
+			take
 		})
 	}
 
@@ -39,7 +76,11 @@ export class ArticleService {
 				content: true,
 				user: true,
 				category: true,
-				comments: true
+				comments: {
+					include: {
+						user: true
+					}
+				}
 			}
 		})
 		if (!article) throw new NotFoundException('Пост не найден.')

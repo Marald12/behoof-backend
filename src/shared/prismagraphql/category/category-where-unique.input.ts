@@ -25,6 +25,9 @@ export class CategoryWhereUniqueInput {
     @Field(() => StringFilter, {nullable:true})
     title?: StringFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    banner?: StringFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 

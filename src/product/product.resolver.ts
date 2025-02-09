@@ -28,6 +28,11 @@ export class ProductResolver {
 		return this.productService.findPopularProducts()
 	}
 
+	@Query(() => [Product])
+	public searchProducts(@Args('search') search: string) {
+		return this.productService.searchProducts(search)
+	}
+
 	@Mutation(() => Product)
 	public updateProduct(
 		@Args('id') id: string,

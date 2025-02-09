@@ -11,6 +11,9 @@ export class CategoryMaxAggregateInput {
     title?: true;
 
     @Field(() => Boolean, {nullable:true})
+    banner?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

@@ -13,6 +13,9 @@ export class CategoryGroupBy {
     @Field(() => String, {nullable:false})
     title!: string;
 
+    @Field(() => String, {nullable:false})
+    banner!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

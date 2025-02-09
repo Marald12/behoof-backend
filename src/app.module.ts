@@ -9,15 +9,14 @@ import { AuthModule } from './auth/auth.module'
 import * as process from 'node:process'
 import { MediaResolver } from './media/media.resolver'
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { CategoryModule } from './category/category.module';
-import { BrandModule } from './brand/brand.module';
-import { ProductModule } from './product/product.module';
-import { ColorModule } from './color/color.module';
-import { ReviewModule } from './review/review.module';
-import { QuestionModule } from './question/question.module';
-import { ArticleContentModule } from './article-content/article-content.module';
-import { ArticleModule } from './article/article.module';
-import { CommentModule } from './comment/comment.module';
+import { CategoryModule } from './category/category.module'
+import { BrandModule } from './brand/brand.module'
+import { ProductModule } from './product/product.module'
+import { ColorModule } from './color/color.module'
+import { ReviewModule } from './review/review.module'
+import { QuestionModule } from './question/question.module'
+import { ArticleModule } from './article/article.module'
+import { CommentModule } from './comment/comment.module'
 
 @Module({
 	imports: [
@@ -44,7 +43,6 @@ import { CommentModule } from './comment/comment.module';
 		ColorModule,
 		ReviewModule,
 		QuestionModule,
-		ArticleContentModule,
 		ArticleModule,
 		CommentModule
 	],

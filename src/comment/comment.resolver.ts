@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Resolver } from '@nestjs/graphql'
 import { CommentService } from './comment.service'
 import { Comment } from '../shared/prismagraphql/comment'
 import { CommentDto } from './comment.dto'
@@ -16,12 +16,5 @@ export class CommentResolver {
 		@CurrentUser() userId: string
 	) {
 		return this.commentService.create(userId, body)
-	}
-
-	@Query(() => [Comment])
-	public findAllComments(
-		@Args('articleId', { nullable: true }) articleId?: string
-	) {
-		return this.commentService.findAll(articleId)
 	}
 }

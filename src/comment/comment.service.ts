@@ -20,14 +20,4 @@ export class CommentService {
 			}
 		})
 	}
-
-	public async findAll(articleId?: string) {
-		return this.prismaService.comment.findMany({
-			where: { articleId },
-			include: {
-				article: true,
-				user: true
-			}
-		})
-	}
 }

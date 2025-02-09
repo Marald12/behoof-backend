@@ -15,6 +15,9 @@ export class Category {
     @Field(() => String, {nullable:false})
     title!: string;
 
+    @Field(() => String, {defaultValue:'',nullable:false})
+    banner!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

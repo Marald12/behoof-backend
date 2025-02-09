@@ -12,6 +12,9 @@ export class CategoryCountOrderByAggregateInput {
     title?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})
+    banner?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})

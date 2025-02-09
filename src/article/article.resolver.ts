@@ -19,8 +19,14 @@ export class ArticleResolver {
 	}
 
 	@Query(() => [Article])
-	public findAllArticles() {
-		return this.articleService.findAll()
+	public findAllArticles(
+		@Args('take', { nullable: true }) take?: number,
+		@Args('skip', { nullable: true }) skip?: number,
+		@Args('search', { nullable: true }) search?: string,
+		@Args('categoryId', { nullable: true }) categoryId?: string,
+		@Args('tag', { nullable: true }) tag?: string
+	) {
+		return this.articleService.findAll(take, skip, search, categoryId, tag)
 	}
 
 	@Query(() => Article)

@@ -33,4 +33,16 @@ export class CategoryService {
 
 		return category
 	}
+
+	public async getForMenu() {
+		return this.prismaService.category.findMany({
+			include: {
+				brands: {
+					include: {
+						products: true
+					}
+				}
+			}
+		})
+	}
 }

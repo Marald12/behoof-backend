@@ -124,6 +124,7 @@ type CategoryCount {
 type Category {
   id: ID!
   title: String!
+  banner: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   products: [Product!]
@@ -216,6 +217,7 @@ type UploadedFile {
 type CategoryCountAggregate {
   id: Int!
   title: Int!
+  banner: Int!
   createdAt: Int!
   updatedAt: Int!
   _all: Int!
@@ -224,6 +226,7 @@ type CategoryCountAggregate {
 type CategoryMinAggregate {
   id: String
   title: String
+  banner: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -231,6 +234,7 @@ type CategoryMinAggregate {
 type CategoryMaxAggregate {
   id: String
   title: String
+  banner: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -463,20 +467,21 @@ type Query {
   getProfile: User!
   findAllCategories: [Category!]!
   findByIdCategory(id: String!): Category!
+  getCategoriesForMenu: [Category!]!
   findAllBrands: [Brand!]!
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!
   findProductById(id: String!): Product!
   findPopularProducts: [Product!]!
+  searchProducts(search: String!): [Product!]!
   findAllColors: [Color!]!
   findColorById(id: String!): Color!
   findAllReviews: [Review!]!
   findReviewById(id: String!): Review!
   findAllQuestions: [Question!]!
   findQuestionById(id: String!): Question!
-  findAllArticles: [Article!]!
+  findAllArticles(take: Float, skip: Float, search: String, categoryId: String, tag: String): [Article!]!
   findArticleById(id: String!): Article!
-  findAllComments(articleId: String): [Comment!]!
 }
 
 type Mutation {

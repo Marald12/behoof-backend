@@ -63,8 +63,9 @@ model Product {
 }
 
 model Category {
-  id    String @id @default(uuid())
-  title String
+  id     String @id @default(uuid())
+  title  String
+  banner String @default("")
 
   products Product[]
   brands   Brand[]
