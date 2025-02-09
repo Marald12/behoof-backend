@@ -19,8 +19,8 @@ export class ArticleContentCreateInput {
     @Field(() => ArticleContentCreateimagesInput, {nullable:true})
     images?: ArticleContentCreateimagesInput;
 
-    @Field(() => ArticleContentTypes, {nullable:false})
-    types!: `${ArticleContentTypes}`;
+    @Field(() => ArticleContentTypes, {nullable:true})
+    types?: `${ArticleContentTypes}`;
 
     @Field(() => ArticleCreateNestedOneWithoutContentInput, {nullable:false})
     article!: ArticleCreateNestedOneWithoutContentInput;

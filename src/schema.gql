@@ -394,6 +394,71 @@ type QuestionMaxAggregate {
   updatedAt: DateTime
 }
 
+type ArticleCountAggregate {
+  id: Int!
+  title: Int!
+  tags: Int!
+  banner: Int!
+  viewsCount: Int!
+  categoryId: Int!
+  userId: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type ArticleAvgAggregate {
+  viewsCount: Float
+}
+
+type ArticleSumAggregate {
+  viewsCount: Int
+}
+
+type ArticleMinAggregate {
+  id: String
+  title: String
+  banner: String
+  viewsCount: Int
+  categoryId: String
+  userId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ArticleMaxAggregate {
+  id: String
+  title: String
+  banner: String
+  viewsCount: Int
+  categoryId: String
+  userId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CommentCountAggregate {
+  id: Int!
+  comment: Int!
+  userId: Int!
+  articleId: Int!
+  _all: Int!
+}
+
+type CommentMinAggregate {
+  id: String
+  comment: String
+  userId: String
+  articleId: String
+}
+
+type CommentMaxAggregate {
+  id: String
+  comment: String
+  userId: String
+  articleId: String
+}
+
 type Query {
   getProfile: User!
   findAllCategories: [Category!]!
@@ -409,6 +474,9 @@ type Query {
   findReviewById(id: String!): Review!
   findAllQuestions: [Question!]!
   findQuestionById(id: String!): Question!
+  findAllArticles: [Article!]!
+  findArticleById(id: String!): Article!
+  findAllComments(articleId: String): [Comment!]!
 }
 
 type Mutation {
@@ -425,6 +493,8 @@ type Mutation {
   createColor(body: ColorDto!): Color!
   createReview(dto: ReviewDto!): Review!
   createQuestion(dto: QuestionDto!): Question!
+  createArticle(body: CreateArticleDto!): Article!
+  createComment(body: CommentDto!): Comment!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -494,4 +564,24 @@ input ReviewDto {
 
 input QuestionDto {
   question: String!
+}
+
+input CreateArticleDto {
+  title: String!
+  tags: [String!]!
+  content: [ArticleContentInput!]!
+  banner: String!
+  categoryId: String!
+}
+
+input ArticleContentInput {
+  title: String!
+  description: String!
+  images: [String!]
+  types: String!
+}
+
+input CommentDto {
+  comment: String!
+  articleId: String!
 }

@@ -40,7 +40,10 @@ export class UserService {
 			where: { id },
 			include: {
 				questions: true,
-				reviews: true
+				reviews: true,
+				articles: true,
+				favoriteProducts: true,
+				comments: true
 			}
 		})
 		if (!user) throw new BadRequestException('Пользователь не найден.')
@@ -59,7 +62,14 @@ export class UserService {
 
 		return this.prismaService.user.update({
 			where: { id },
-			data: dto
+			data: dto,
+			include: {
+				questions: true,
+				reviews: true,
+				articles: true,
+				favoriteProducts: true,
+				comments: true
+			}
 		})
 	}
 }

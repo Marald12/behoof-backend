@@ -160,7 +160,7 @@ model ArticleContent {
   title       String
   description String
   images      String[]            @default([])
-  types       ArticleContentTypes
+  types       ArticleContentTypes @default(TEXT)
 
   article   Article @relation(fields: [articleId], references: [id])
   articleId String

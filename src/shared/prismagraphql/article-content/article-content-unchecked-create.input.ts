@@ -18,8 +18,8 @@ export class ArticleContentUncheckedCreateInput {
     @Field(() => ArticleContentCreateimagesInput, {nullable:true})
     images?: ArticleContentCreateimagesInput;
 
-    @Field(() => ArticleContentTypes, {nullable:false})
-    types!: `${ArticleContentTypes}`;
+    @Field(() => ArticleContentTypes, {nullable:true})
+    types?: `${ArticleContentTypes}`;
 
     @Field(() => String, {nullable:false})
     articleId!: string;

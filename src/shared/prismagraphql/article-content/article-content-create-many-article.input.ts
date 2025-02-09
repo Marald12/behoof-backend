@@ -18,6 +18,6 @@ export class ArticleContentCreateManyArticleInput {
     @Field(() => ArticleContentCreateimagesInput, {nullable:true})
     images?: ArticleContentCreateimagesInput;
 
-    @Field(() => ArticleContentTypes, {nullable:false})
-    types!: `${ArticleContentTypes}`;
+    @Field(() => ArticleContentTypes, {nullable:true})
+    types?: `${ArticleContentTypes}`;
 }

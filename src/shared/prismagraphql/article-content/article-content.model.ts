@@ -19,7 +19,7 @@ export class ArticleContent {
     @Field(() => [String], {nullable:true})
     images!: Array<string>;
 
-    @Field(() => ArticleContentTypes, {nullable:false})
+    @Field(() => ArticleContentTypes, {defaultValue:'TEXT',nullable:false})
     types!: `${ArticleContentTypes}`;
 
     @Field(() => String, {nullable:false})
