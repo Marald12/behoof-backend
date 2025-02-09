@@ -1,12 +1,22 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+	BadRequestException,
+	forwardRef,
+	Inject,
+	Injectable
+} from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { hash } from 'argon2'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { CreateUserDto } from './dto/create-user.dto'
+import { MailService } from '../mail/mail.service'
 
 @Injectable()
 export class UserService {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(
+		private readonly prismaService: PrismaService,
+		@Inject(forwardRef(() => MailService))
+		private readonly mailService: MailService
+	) {}
 
 	public async createUser(body: CreateUserDto) {
 		const user = await this.prismaService.user.findUnique({
@@ -71,5 +81,11 @@ export class UserService {
 				comments: true
 			}
 		})
+	}
+
+	public async changePassword(userId: string) {
+		await this.mailService.sendConfirmMail(userId)
+
+		return 'Okay'
 	}
 }

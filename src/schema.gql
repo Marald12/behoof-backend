@@ -487,6 +487,7 @@ type Query {
 type Mutation {
   uploadFile(file: Upload!): UploadedFile!
   updateUser(body: UpdateUserDto!): User!
+  changePassword: String!
   register(body: CreateUserDto!): User!
   login(body: AuthDto!): User!
   logout: String!

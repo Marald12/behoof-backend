@@ -8,6 +8,9 @@ export const getMailConfig = async (
 ): Promise<MailerOptions> => ({
 	transport: createTransport({
 		service: 'gmail',
+		host: 'smtp.gmail.com',
+		port: 587,
+		secure: false,
 		auth: {
 			user: configService.getOrThrow<string>('GMAIL_USER'),
 			pass: configService.getOrThrow<string>('GMAIL_PASSWORD')

@@ -23,4 +23,10 @@ export class UserResolver {
 	) {
 		return this.userService.updateUser(userId, body)
 	}
+
+	@Mutation(() => String)
+	@Auth()
+	public changePassword(@CurrentUser() userId: string) {
+		return this.userService.changePassword(userId)
+	}
 }

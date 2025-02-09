@@ -17,6 +17,7 @@ import { ReviewModule } from './review/review.module'
 import { QuestionModule } from './question/question.module'
 import { ArticleModule } from './article/article.module'
 import { CommentModule } from './comment/comment.module'
+import { MailModule } from './mail/mail.module'
 
 @Module({
 	imports: [
@@ -44,7 +45,8 @@ import { CommentModule } from './comment/comment.module'
 		ReviewModule,
 		QuestionModule,
 		ArticleModule,
-		CommentModule
+		CommentModule,
+		MailModule
 	],
 	providers: [MediaResolver]
 })
