@@ -18,6 +18,25 @@ export class ProductResolver {
 		return this.productService.findAll()
 	}
 
+	@Query(() => [Product])
+	public filterProducts(
+		@Args('brands', { type: () => [String], nullable: true }) brands?: string[],
+		@Args('minPrice', { nullable: true }) minPrice?: number,
+		@Args('maxPrice', { nullable: true }) maxPrice?: number,
+		@Args('battery', { nullable: true }) battery?: number,
+		@Args('memory', { nullable: true }) memory?: number,
+		@Args('screen', { nullable: true }) screen?: number
+	) {
+		return this.productService.filterProducts(
+			brands,
+			minPrice,
+			maxPrice,
+			battery,
+			memory,
+			screen
+		)
+	}
+
 	@Query(() => Product)
 	public findProductById(@Args('id') id: string) {
 		return this.productService.findById(id)

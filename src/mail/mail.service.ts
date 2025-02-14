@@ -8,7 +8,6 @@ import {
 import { MailerService } from '@nestjs-modules/mailer'
 import { join } from 'path'
 import { ConfigService } from '@nestjs/config'
-import { v4 as uuidv4 } from 'uuid'
 import { UserService } from '../user/user.service'
 
 @Injectable()
@@ -20,15 +19,13 @@ export class MailService {
 		private readonly userService: UserService
 	) {}
 
-	public async sendConfirmMail(userId: string) {
+	public async sendConfirmMail(email: string, token: string) {
 		const clientAddress = this.configService.get<string>('ALLOWED_ORIGIN')
-		const user = await this.userService.findById(userId)
-
-		const token = uuidv4()
+		const user = await this.userService.findByEmail(email)
 
 		return await this.mailerService
 			.sendMail({
-				to: user.email,
+				to: email,
 				subject: 'Смена пароля',
 				template: join(
 					__dirname,

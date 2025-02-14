@@ -15,4 +15,10 @@ export class CommentMinAggregate {
 
     @Field(() => String, {nullable:true})
     articleId?: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

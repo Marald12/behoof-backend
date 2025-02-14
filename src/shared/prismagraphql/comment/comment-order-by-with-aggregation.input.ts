@@ -20,6 +20,12 @@ export class CommentOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     articleId?: `${SortOrder}`;
 
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: `${SortOrder}`;
+
     @Field(() => CommentCountOrderByAggregateInput, {nullable:true})
     _count?: CommentCountOrderByAggregateInput;
 

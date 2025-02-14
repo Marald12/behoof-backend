@@ -19,6 +19,12 @@ export class CommentOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     articleId?: `${SortOrder}`;
 
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: `${SortOrder}`;
+
     @Field(() => UserOrderByWithRelationInput, {nullable:true})
     user?: UserOrderByWithRelationInput;
 

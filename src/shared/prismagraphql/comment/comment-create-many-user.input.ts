@@ -12,4 +12,10 @@ export class CommentCreateManyUserInput {
 
     @Field(() => String, {nullable:false})
     articleId!: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

@@ -48,6 +48,41 @@ export class ProductService {
 		})
 	}
 
+	public async filterProducts(
+		brands?: string[],
+		minPrice?: number,
+		maxPrice?: number,
+		battery?: number,
+		memory?: number,
+		screen?: number
+	) {
+		return this.prismaService.product.findMany({
+			where: {
+				brandId: brands ? { in: brands } : undefined,
+				price:
+					minPrice !== undefined || maxPrice !== undefined
+						? {
+								...(minPrice !== undefined ? { gte: minPrice } : {}),
+								...(maxPrice !== undefined ? { lte: maxPrice } : {})
+							}
+						: undefined,
+				AND: [
+					battery
+						? { characteristics: { path: ['battery'], equals: battery } }
+						: {},
+					memory
+						? {
+								characteristics: { path: ['memory'], array_contains: [memory] }
+							}
+						: {},
+					screen
+						? { characteristics: { path: ['screen'], equals: screen } }
+						: {}
+				].filter(condition => Object.keys(condition).length > 0)
+			}
+		})
+	}
+
 	public async findById(id: string) {
 		const product = await this.prismaService.product.findUnique({
 			where: {

@@ -11,6 +11,12 @@ export class CommentCreateWithoutArticleInput {
     @Field(() => String, {nullable:false})
     comment!: string;
 
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
     @Field(() => UserCreateNestedOneWithoutCommentsInput, {nullable:false})
     user!: UserCreateNestedOneWithoutCommentsInput;
 }

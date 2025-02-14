@@ -4,6 +4,7 @@ import { User } from '../shared/prismagraphql/user'
 import { Auth } from '../auth/auth.decorator'
 import { CurrentUser } from './user.decorator'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { Token } from '../shared/prismagraphql/token'
 
 @Resolver()
 export class UserResolver {
@@ -24,9 +25,42 @@ export class UserResolver {
 		return this.userService.updateUser(userId, body)
 	}
 
-	@Mutation(() => String)
+	@Mutation(() => Token)
 	@Auth()
-	public changePassword(@CurrentUser() userId: string) {
-		return this.userService.changePassword(userId)
+	public createTokenAndSendEmail(@CurrentUser() userId: string) {
+		return this.userService.createTokenAndSendMail(userId)
+	}
+
+	@Mutation(() => Token)
+	public async findByEmailAndCreateAndSendEmail(@Args('email') email: string) {
+		const user = await this.userService.findByEmail(email)
+
+		return this.userService.createTokenAndSendMail(user.email)
+	}
+
+	@Mutation(() => User)
+	public changePassword(
+		@Args('token') token: string,
+		@Args('password') password: string
+	) {
+		return this.userService.changePassword(token, password)
+	}
+
+	@Mutation(() => User)
+	@Auth()
+	public addProductToFavorite(
+		@CurrentUser() userId: string,
+		@Args('productId') productId: string
+	) {
+		return this.userService.addProductToFavorite(userId, productId)
+	}
+
+	@Mutation(() => User)
+	@Auth()
+	public removeProductFromFavorite(
+		@CurrentUser() userId: string,
+		@Args('productId') productId: string
+	) {
+		return this.userService.removeProductFromFavorite(userId, productId)
 	}
 }

@@ -1,28 +1,24 @@
 import { ConfigService } from '@nestjs/config'
 import { MailerOptions } from '@nestjs-modules/mailer'
-import { createTransport } from 'nodemailer'
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'
 
 export const getMailConfig = async (
 	configService: ConfigService
-): Promise<MailerOptions> => ({
-	transport: createTransport({
-		service: 'gmail',
-		host: 'smtp.gmail.com',
-		port: 587,
-		secure: false,
-		auth: {
-			user: configService.getOrThrow<string>('GMAIL_USER'),
-			pass: configService.getOrThrow<string>('GMAIL_PASSWORD')
-		}
-	}),
-	defaults: {
-		from: `Behoof <${configService.getOrThrow<string>('GMAIL_USER')}>`
-	},
-	template: {
-		adapter: new EjsAdapter(),
-		options: {
-			strict: false
+): Promise<MailerOptions> => {
+	const transport = configService.get<string>('MAIL_TRANSPORT')
+	const mailFromName = configService.get<string>('MAIL_NAME')
+	const mailFromAddress = transport!.split(':')[1].split('//')[1]
+
+	return {
+		transport,
+		defaults: {
+			from: `"${mailFromName}" <${mailFromAddress}>`
+		},
+		template: {
+			adapter: new EjsAdapter(),
+			options: {
+				strict: false
+			}
 		}
 	}
-})
+}

@@ -19,6 +19,12 @@ export class CommentGroupBy {
     @Field(() => String, {nullable:false})
     articleId!: string;
 
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
     @Field(() => CommentCountAggregate, {nullable:true})
     _count?: CommentCountAggregate;
 

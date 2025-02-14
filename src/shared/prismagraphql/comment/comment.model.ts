@@ -19,6 +19,12 @@ export class Comment {
     @Field(() => String, {nullable:false})
     articleId!: string;
 
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
+
     @Field(() => User, {nullable:false})
     user?: User;
 

@@ -2,13 +2,15 @@ import {
 	BadRequestException,
 	forwardRef,
 	Inject,
-	Injectable
+	Injectable,
+	NotFoundException
 } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { hash } from 'argon2'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { CreateUserDto } from './dto/create-user.dto'
 import { MailService } from '../mail/mail.service'
+import { Token } from '../shared/prismagraphql/token'
 
 @Injectable()
 export class UserService {
@@ -83,9 +85,105 @@ export class UserService {
 		})
 	}
 
-	public async changePassword(userId: string) {
-		await this.mailService.sendConfirmMail(userId)
+	public async createTokenAndSendMail(email: string) {
+		const token = await this.prismaService.token.create({
+			data: {
+				type: 'PASSWORD',
+				// @ts-ignore
+				email
+			}
+		})
 
-		return 'Okay'
+		await this.mailService.sendConfirmMail(email, token.token)
+
+		setTimeout(
+			async () => {
+				await this.prismaService.token.delete({
+					where: { id: token.id }
+				})
+			},
+			30 * 60 * 1000
+		)
+
+		return token
+	}
+
+	public async changePassword(token: string, password: string) {
+		const tokenData = (await this.prismaService.token.findUnique({
+			where: { token }
+		})) as Token
+		const user = await this.findByEmail(tokenData.email)
+		if (!tokenData) {
+			throw new NotFoundException('Токен восстановления не найден.')
+		}
+
+		await this.prismaService.user.update({
+			where: { id: user.id },
+			data: {
+				password: await hash(password)
+			}
+		})
+
+		await this.prismaService.token.delete({ where: { id: tokenData.id } })
+
+		return await this.findById(user.id)
+	}
+
+	public async addProductToFavorite(userId: string, productId: string) {
+		const product = await this.prismaService.product.findUnique({
+			where: { id: productId }
+		})
+		if (!product) throw new NotFoundException('Продукт не найден.')
+
+		const isFavorite = await this.prismaService.user.findFirst({
+			where: {
+				id: userId,
+				favoriteProducts: {
+					some: { id: productId }
+				}
+			}
+		})
+
+		if (isFavorite) throw new Error('Продукт уже в избранном.')
+
+		await this.prismaService.user.update({
+			where: { id: userId },
+			data: {
+				favoriteProducts: {
+					connect: { id: productId }
+				}
+			}
+		})
+
+		return this.findById(userId)
+	}
+
+	public async removeProductFromFavorite(userId: string, productId: string) {
+		const product = await this.prismaService.product.findUnique({
+			where: { id: productId }
+		})
+		if (!product) throw new NotFoundException('Продукт не найден.')
+
+		const isFavorite = await this.prismaService.user.findFirst({
+			where: {
+				id: userId,
+				favoriteProducts: {
+					some: { id: productId }
+				}
+			}
+		})
+
+		if (!isFavorite) throw new Error('Продукта нет в избранном.')
+
+		await this.prismaService.user.update({
+			where: { id: userId },
+			data: {
+				favoriteProducts: {
+					disconnect: { id: productId }
+				}
+			}
+		})
+
+		return this.findById(userId)
 	}
 }

@@ -89,6 +89,8 @@ type Comment {
   comment: String!
   userId: String!
   articleId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   user: User!
   article: Article!
 }
@@ -207,6 +209,48 @@ type User {
   comments: [Comment!]
   favoriteProducts: [Product!]
   _count: UserCount!
+}
+
+type TokenCountAggregate {
+  id: Int!
+  token: Int!
+  type: Int!
+  email: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type TokenMinAggregate {
+  id: String
+  token: String
+  type: TokensType
+  email: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+enum TokensType {
+  PASSWORD
+  REGISTER
+}
+
+type TokenMaxAggregate {
+  id: String
+  token: String
+  type: TokensType
+  email: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Token {
+  id: ID!
+  token: String!
+  type: TokensType!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UploadedFile {
@@ -446,6 +490,8 @@ type CommentCountAggregate {
   comment: Int!
   userId: Int!
   articleId: Int!
+  createdAt: Int!
+  updatedAt: Int!
   _all: Int!
 }
 
@@ -454,6 +500,8 @@ type CommentMinAggregate {
   comment: String
   userId: String
   articleId: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type CommentMaxAggregate {
@@ -461,6 +509,8 @@ type CommentMaxAggregate {
   comment: String
   userId: String
   articleId: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type Query {
@@ -471,6 +521,7 @@ type Query {
   findAllBrands: [Brand!]!
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!
+  filterProducts(brands: [String!], minPrice: Float, maxPrice: Float, battery: Float, memory: Float, screen: Float): [Product!]!
   findProductById(id: String!): Product!
   findPopularProducts: [Product!]!
   searchProducts(search: String!): [Product!]!
@@ -487,7 +538,11 @@ type Query {
 type Mutation {
   uploadFile(file: Upload!): UploadedFile!
   updateUser(body: UpdateUserDto!): User!
-  changePassword: String!
+  createTokenAndSendEmail: Token!
+  findByEmailAndCreateAndSendEmail(email: String!): Token!
+  changePassword(token: String!, password: String!): User!
+  addProductToFavorite(productId: String!): User!
+  removeProductFromFavorite(productId: String!): User!
   register(body: CreateUserDto!): User!
   login(body: AuthDto!): User!
   logout: String!

@@ -16,4 +16,10 @@ export class CommentMaxOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     articleId?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: `${SortOrder}`;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: `${SortOrder}`;
 }

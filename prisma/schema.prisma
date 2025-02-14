@@ -185,5 +185,26 @@ model Comment {
   article   Article @relation(fields: [articleId], references: [id])
   articleId String
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("comments")
+}
+
+model Token {
+  id String @id @default(uuid())
+
+  token String     @unique @default(uuid())
+  type  TokensType
+  email String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tokens")
+}
+
+enum TokensType {
+  PASSWORD
+  REGISTER
 }
