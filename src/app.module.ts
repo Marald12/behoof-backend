@@ -28,7 +28,7 @@ import { MailModule } from './mail/mail.module'
 			context: ({ req, res }) => ({ req, res })
 		}),
 		ConfigModule.forRoot({
-			envFilePath: '.env',
+			envFilePath: '.env.local',
 			isGlobal: true
 		}),
 		ServeStaticModule.forRoot({
