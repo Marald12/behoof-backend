@@ -72,9 +72,25 @@ export class UserService {
 	public async updateUser(id: string, dto: UpdateUserDto) {
 		await this.findById(id) // Проверка на существование пользователя
 
-		return this.prismaService.user.update({
-			where: { id },
-			data: dto,
+		if (dto.country && !dto.city) {
+			await this.prismaService.user.update({
+				where: { id: id },
+				data: { ...dto, country: dto.country, city: '' },
+				include: {
+					questions: true,
+					reviews: true,
+					articles: true,
+					favoriteProducts: true,
+					comments: true
+				}
+			})
+
+			return await this.findById(id)
+		}
+
+		await this.prismaService.user.update({
+			where: { id: id },
+			data: { ...dto },
 			include: {
 				questions: true,
 				reviews: true,
@@ -83,6 +99,8 @@ export class UserService {
 				comments: true
 			}
 		})
+
+		return await this.findById(id)
 	}
 
 	public async createTokenAndSendMail(email: string) {

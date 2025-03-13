@@ -580,6 +580,7 @@ input AuthDto {
 
 input CategoryDto {
   title: String!
+  banner: String!
 }
 
 input BrandDto {
