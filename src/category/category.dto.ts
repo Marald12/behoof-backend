@@ -1,5 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator'
+import {
+	IsNotEmpty,
+	IsOptional,
+	IsString,
+	MaxLength,
+	MinLength
+} from 'class-validator'
 
 @InputType()
 export class CategoryDto {
@@ -9,4 +15,8 @@ export class CategoryDto {
 	@MinLength(3, { message: 'Минимальная длина названия 3 символа.' })
 	@MaxLength(50, { message: 'Максимальная длина названия 50 символов.' })
 	public readonly title: string
+
+	@Field()
+	@IsOptional()
+	public readonly banner: string
 }

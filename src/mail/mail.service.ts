@@ -1,10 +1,4 @@
-import {
-	forwardRef,
-	HttpException,
-	HttpStatus,
-	Inject,
-	Injectable
-} from '@nestjs/common'
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { MailerService } from '@nestjs-modules/mailer'
 import { join } from 'path'
 import { ConfigService } from '@nestjs/config'
@@ -36,7 +30,7 @@ export class MailService {
 				),
 				context: {
 					username: user.name,
-					urlConfirmAddress: `${clientAddress}/change-password/${token}`
+					urlConfirmAddress: `${clientAddress}/restore-password/${token}`
 				}
 			})
 			.catch(e => {

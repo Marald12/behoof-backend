@@ -31,7 +31,7 @@ export class CreateProductDto {
 
 	@Field(() => GraphQLJSONObject)
 	@IsNotEmpty({ message: 'Характеристики не должны быть пустыми.' })
-	public readonly characteristics: Record<string, any>
+	public readonly characteristics: Record<any, any>
 
 	@Field()
 	@IsNumber({}, { message: 'Рейтинг должен быть числом.' })

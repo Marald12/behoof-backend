@@ -25,7 +25,9 @@ export class ProductResolver {
 		@Args('maxPrice', { nullable: true }) maxPrice?: number,
 		@Args('battery', { nullable: true }) battery?: number,
 		@Args('memory', { nullable: true }) memory?: number,
-		@Args('screen', { nullable: true }) screen?: number
+		@Args('screen', { nullable: true }) screen?: number,
+		@Args('category', { nullable: true }) category?: string,
+		@Args('allRating', { nullable: true }) allRating?: number
 	) {
 		return this.productService.filterProducts(
 			brands,
@@ -33,7 +35,9 @@ export class ProductResolver {
 			maxPrice,
 			battery,
 			memory,
-			screen
+			screen,
+			category,
+			allRating
 		)
 	}
 

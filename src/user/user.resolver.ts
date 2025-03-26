@@ -35,7 +35,7 @@ export class UserResolver {
 	public async findByEmailAndCreateAndSendEmail(@Args('email') email: string) {
 		const user = await this.userService.findByEmail(email)
 
-		return this.userService.createTokenAndSendMail(user.email)
+		return this.userService.createTokenAndSendMail(user.id)
 	}
 
 	@Mutation(() => User)
@@ -62,5 +62,10 @@ export class UserResolver {
 		@Args('productId') productId: string
 	) {
 		return this.userService.removeProductFromFavorite(userId, productId)
+	}
+
+	@Mutation(() => Token)
+	public checkToken(@Args('token') token: string) {
+		return this.userService.checkToken(token)
 	}
 }

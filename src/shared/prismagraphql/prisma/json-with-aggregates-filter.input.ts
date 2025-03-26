@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { GraphQLJSON } from 'graphql-type-json';
+import { QueryMode } from './query-mode.enum';
 import { NestedIntFilter } from './nested-int-filter.input';
 import { NestedJsonFilter } from './nested-json-filter.input';
 
@@ -12,6 +13,9 @@ export class JsonWithAggregatesFilter {
 
     @Field(() => [String], {nullable:true})
     path?: Array<string>;
+
+    @Field(() => QueryMode, {nullable:true})
+    mode?: `${QueryMode}`;
 
     @Field(() => String, {nullable:true})
     string_contains?: string;

@@ -72,9 +72,25 @@ export class UserService {
 	public async updateUser(id: string, dto: UpdateUserDto) {
 		await this.findById(id) // Проверка на существование пользователя
 
-		return this.prismaService.user.update({
-			where: { id },
-			data: dto,
+		if (dto.country && !dto.city) {
+			await this.prismaService.user.update({
+				where: { id: id },
+				data: { ...dto, country: dto.country, city: '' },
+				include: {
+					questions: true,
+					reviews: true,
+					articles: true,
+					favoriteProducts: true,
+					comments: true
+				}
+			})
+
+			return await this.findById(id)
+		}
+
+		await this.prismaService.user.update({
+			where: { id: id },
+			data: { ...dto },
 			include: {
 				questions: true,
 				reviews: true,
@@ -83,18 +99,21 @@ export class UserService {
 				comments: true
 			}
 		})
+
+		return await this.findById(id)
 	}
 
-	public async createTokenAndSendMail(email: string) {
+	public async createTokenAndSendMail(id: string) {
+		const user = await this.findById(id)
+
 		const token = await this.prismaService.token.create({
 			data: {
 				type: 'PASSWORD',
-				// @ts-ignore
-				email
+				email: user.email
 			}
 		})
 
-		await this.mailService.sendConfirmMail(email, token.token)
+		await this.mailService.sendConfirmMail(user.email, token.token)
 
 		setTimeout(
 			async () => {
@@ -127,6 +146,15 @@ export class UserService {
 		await this.prismaService.token.delete({ where: { id: tokenData.id } })
 
 		return await this.findById(user.id)
+	}
+
+	public async checkToken(token: string) {
+		const tokenData = await this.prismaService.token.findUnique({
+			where: { token }
+		})
+		if (!tokenData) throw new NotFoundException('Токен не найден.')
+
+		return tokenData
 	}
 
 	public async addProductToFavorite(userId: string, productId: string) {

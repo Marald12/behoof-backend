@@ -54,10 +54,106 @@ export class ProductService {
 		maxPrice?: number,
 		battery?: number,
 		memory?: number,
-		screen?: number
+		screen?: number,
+		category?: string,
+		allRating?: number
 	) {
+		// where: {
+		// 	categoryId: category,
+		// 		brandId: brands ? { in: brands } : undefined,
+		// 		price:
+		// 	minPrice !== undefined || maxPrice !== undefined
+		// 		? {
+		// 			...(minPrice !== undefined ? { gte: minPrice } : {}),
+		// 			...(maxPrice !== undefined ? { lte: maxPrice } : {})
+		// 		}
+		// 		: undefined,
+		// 		AND: [
+		// 		os ? { characteristics: { path: ['os'], equals: os } } : {},
+		// 		camera
+		// 			? { characteristics: { path: ['camera'], equals: camera } }
+		// 			: {},
+		// 		memory
+		// 			? {
+		// 				characteristics: { path: ['memory'], array_contains: [memory] }
+		// 			}
+		// 			: {},
+		// 		screenDiagonal
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['screen', 'diagonal'],
+		// 					equals: screenDiagonal
+		// 				}
+		// 			}
+		// 			: {},
+		// 		screenType
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['screen', 'type'],
+		// 					equals: screenType
+		// 				}
+		// 			}
+		// 			: {},
+		// 		densityScreen
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['screen', 'densityScreen'],
+		// 					equals: densityScreen
+		// 				}
+		// 			}
+		// 			: {},
+		// 		answerCount
+		// 			? {
+		// 				characteristics: { path: ['answerCount'], equals: answerCount }
+		// 			}
+		// 			: {},
+		// 		cameraCount
+		// 			? {
+		// 				characteristics: { path: ['cameraCount'], equals: cameraCount }
+		// 			}
+		// 			: {},
+		// 		designCount
+		// 			? {
+		// 				characteristics: { path: ['designCount'], equals: designCount }
+		// 			}
+		// 			: {},
+		// 		batteryCount
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['batteryCount'],
+		// 					equals: batteryCount
+		// 				}
+		// 			}
+		// 			: {},
+		// 		chargingType
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['chargingType'],
+		// 					equals: chargingType
+		// 				}
+		// 			}
+		// 			: {},
+		// 		displayCount
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['displayCount'],
+		// 					equals: displayCount
+		// 				}
+		// 			}
+		// 			: {},
+		// 		portabilityCount
+		// 			? {
+		// 				characteristics: {
+		// 					path: ['portabilityCount'],
+		// 					equals: portabilityCount
+		// 				}
+		// 			}
+		// 			: {}
+		// 	].filter(condition => Object.keys(condition).length > 0)
+
 		return this.prismaService.product.findMany({
 			where: {
+				categoryId: category,
 				brandId: brands ? { in: brands } : undefined,
 				price:
 					minPrice !== undefined || maxPrice !== undefined
@@ -68,7 +164,7 @@ export class ProductService {
 						: undefined,
 				AND: [
 					battery
-						? { characteristics: { path: ['battery'], equals: battery } }
+						? { characteristics: { path: ['batteryCount'], equals: battery } }
 						: {},
 					memory
 						? {
@@ -76,7 +172,10 @@ export class ProductService {
 							}
 						: {},
 					screen
-						? { characteristics: { path: ['screen'], equals: screen } }
+						? { characteristics: { path: ['displayCount'], equals: screen } }
+						: {},
+					allRating
+						? { characteristics: { path: ['answerCount'], equals: allRating } }
 						: {}
 				].filter(condition => Object.keys(condition).length > 0)
 			}

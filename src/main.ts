@@ -22,8 +22,8 @@ async function bootstrap() {
 	const redis = new IORedis({
 		host: config.getOrThrow<string>('REDIS_HOST'),
 		password: config.getOrThrow<string>('REDIS_PASSWORD'),
-		port: config.getOrThrow<number>('REDIS_PORT'),
-		username: config.getOrThrow<string>('REDIS_USER')
+		port: config.getOrThrow<number>('REDIS_PORT')
+		// username: config.getOrThrow<string>('REDIS_USER')
 	})
 
 	app.use(cookieParser(config.getOrThrow<string>('COOKIES_SECRET')))
@@ -46,7 +46,7 @@ async function bootstrap() {
 				maxAge: ms(config.getOrThrow<StringValue>('SESSION_MAX_AGE')),
 				httpOnly: parseBoolean(config.getOrThrow<string>('SESSION_HTTP_ONLY')),
 				secure: parseBoolean(config.getOrThrow<string>('SESSION_SECURE')),
-				sameSite: 'none'
+				sameSite: 'lax'
 			},
 			store: new RedisStore({
 				client: redis,

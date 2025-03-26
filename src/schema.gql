@@ -521,7 +521,7 @@ type Query {
   findAllBrands: [Brand!]!
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!
-  filterProducts(brands: [String!], minPrice: Float, maxPrice: Float, battery: Float, memory: Float, screen: Float): [Product!]!
+  filterProducts(brands: [String!], minPrice: Float, maxPrice: Float, battery: Float, memory: Float, screen: Float, category: String, allRating: Float): [Product!]!
   findProductById(id: String!): Product!
   findPopularProducts: [Product!]!
   searchProducts(search: String!): [Product!]!
@@ -543,6 +543,7 @@ type Mutation {
   changePassword(token: String!, password: String!): User!
   addProductToFavorite(productId: String!): User!
   removeProductFromFavorite(productId: String!): User!
+  checkToken(token: String!): Token!
   register(body: CreateUserDto!): User!
   login(body: AuthDto!): User!
   logout: String!
@@ -580,6 +581,7 @@ input AuthDto {
 
 input CategoryDto {
   title: String!
+  banner: String!
 }
 
 input BrandDto {
