@@ -27,7 +27,10 @@ export class ProductResolver {
 		@Args('memory', { nullable: true }) memory?: number,
 		@Args('screen', { nullable: true }) screen?: number,
 		@Args('category', { nullable: true }) category?: string,
-		@Args('allRating', { nullable: true }) allRating?: number
+		@Args('allRating', { nullable: true }) allRating?: number,
+		@Args('portabilityCount', { nullable: true }) portabilityCount?: number,
+		@Args('skip', { nullable: true }) skip?: number,
+		@Args('take', { nullable: true }) take?: number
 	) {
 		return this.productService.filterProducts(
 			brands,
@@ -37,7 +40,10 @@ export class ProductResolver {
 			memory,
 			screen,
 			category,
-			allRating
+			allRating,
+			portabilityCount,
+			skip,
+			take
 		)
 	}
 

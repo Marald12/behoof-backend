@@ -521,7 +521,7 @@ type Query {
   findAllBrands: [Brand!]!
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!
-  filterProducts(brands: [String!], minPrice: Float, maxPrice: Float, battery: Float, memory: Float, screen: Float, category: String, allRating: Float): [Product!]!
+  filterProducts(brands: [String!], minPrice: Float, maxPrice: Float, battery: Float, memory: Float, screen: Float, category: String, allRating: Float, portabilityCount: Float, skip: Float, take: Float): [Product!]!
   findProductById(id: String!): Product!
   findPopularProducts: [Product!]!
   searchProducts(search: String!): [Product!]!
