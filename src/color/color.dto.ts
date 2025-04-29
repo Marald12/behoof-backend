@@ -8,4 +8,9 @@ export class ColorDto {
 	@IsNotEmpty({ message: 'Цвет не должно быть пустым.' })
 	@IsHexColor({ message: 'Цвет должен быть в формате HEX.' })
 	public readonly color: string
+
+	@Field()
+	@IsString({ message: 'Название цвета должно быть строкой.' })
+	@IsNotEmpty({ message: 'Название цвета не должно быть пустым.' })
+	public readonly title: string
 }

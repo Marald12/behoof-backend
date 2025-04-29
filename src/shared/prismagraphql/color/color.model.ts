@@ -13,6 +13,9 @@ export class Color {
     @Field(() => String, {nullable:false})
     color!: string;
 
+    @Field(() => String, {nullable:false})
+    title!: string;
+
     @Field(() => [Product], {nullable:true})
     products?: Array<Product>;
 

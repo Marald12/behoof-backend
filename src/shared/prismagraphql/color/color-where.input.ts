@@ -21,6 +21,9 @@ export class ColorWhereInput {
     @Field(() => StringFilter, {nullable:true})
     color?: StringFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    title?: StringFilter;
+
     @Field(() => ProductListRelationFilter, {nullable:true})
     products?: ProductListRelationFilter;
 }

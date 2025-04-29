@@ -19,4 +19,7 @@ export class ColorScalarWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     color?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
+    title?: StringFilter;
 }

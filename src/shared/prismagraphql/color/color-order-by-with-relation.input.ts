@@ -12,6 +12,9 @@ export class ColorOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     color?: `${SortOrder}`;
 
+    @Field(() => SortOrder, {nullable:true})
+    title?: `${SortOrder}`;
+
     @Field(() => ProductOrderByRelationAggregateInput, {nullable:true})
     products?: ProductOrderByRelationAggregateInput;
 }

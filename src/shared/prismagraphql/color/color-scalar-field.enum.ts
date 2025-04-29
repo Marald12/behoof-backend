@@ -2,7 +2,8 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum ColorScalarFieldEnum {
     id = "id",
-    color = "color"
+    color = "color",
+    title = "title"
 }
 
 

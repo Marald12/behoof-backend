@@ -1,10 +1,4 @@
-import {
-	BadRequestException,
-	forwardRef,
-	Inject,
-	Injectable,
-	NotFoundException
-} from '@nestjs/common'
+import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { hash } from 'argon2'
 import { UpdateUserDto } from './dto/update-user.dto'
@@ -18,7 +12,8 @@ export class UserService {
 		private readonly prismaService: PrismaService,
 		@Inject(forwardRef(() => MailService))
 		private readonly mailService: MailService
-	) {}
+	) {
+	}
 
 	public async createUser(body: CreateUserDto) {
 		const user = await this.prismaService.user.findUnique({
@@ -172,7 +167,7 @@ export class UserService {
 			}
 		})
 
-		if (isFavorite) throw new Error('Продукт уже в избранном.')
+		if (isFavorite) throw new BadRequestException('Продукт уже в избранном.')
 
 		await this.prismaService.user.update({
 			where: { id: userId },

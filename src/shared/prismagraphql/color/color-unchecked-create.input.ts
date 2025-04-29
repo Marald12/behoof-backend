@@ -11,6 +11,9 @@ export class ColorUncheckedCreateInput {
     @Field(() => String, {nullable:false})
     color!: string;
 
+    @Field(() => String, {nullable:false})
+    title!: string;
+
     @Field(() => ProductUncheckedCreateNestedManyWithoutColorsInput, {nullable:true})
     products?: ProductUncheckedCreateNestedManyWithoutColorsInput;
 }

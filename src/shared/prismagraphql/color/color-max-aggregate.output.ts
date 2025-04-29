@@ -9,4 +9,7 @@ export class ColorMaxAggregate {
 
     @Field(() => String, {nullable:true})
     color?: string;
+
+    @Field(() => String, {nullable:true})
+    title?: string;
 }

@@ -19,4 +19,7 @@ export class ColorScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     color?: StringWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    title?: StringWithAggregatesFilter;
 }

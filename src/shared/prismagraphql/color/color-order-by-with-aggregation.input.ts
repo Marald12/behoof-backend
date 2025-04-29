@@ -14,6 +14,9 @@ export class ColorOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     color?: `${SortOrder}`;
 
+    @Field(() => SortOrder, {nullable:true})
+    title?: `${SortOrder}`;
+
     @Field(() => ColorCountOrderByAggregateInput, {nullable:true})
     _count?: ColorCountOrderByAggregateInput;
 

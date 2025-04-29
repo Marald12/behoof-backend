@@ -9,4 +9,7 @@ export class ColorCreateManyInput {
 
     @Field(() => String, {nullable:false})
     color!: string;
+
+    @Field(() => String, {nullable:false})
+    title!: string;
 }

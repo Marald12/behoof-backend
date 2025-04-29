@@ -65,6 +65,7 @@ type ColorCount {
 type Color {
   id: ID!
   color: String!
+  title: String!
   products: [Product!]
   _count: ColorCount!
 }
@@ -365,17 +366,20 @@ type ProductMaxAggregate {
 type ColorCountAggregate {
   id: Int!
   color: Int!
+  title: Int!
   _all: Int!
 }
 
 type ColorMinAggregate {
   id: String
   color: String
+  title: String
 }
 
 type ColorMaxAggregate {
   id: String
   color: String
+  title: String
 }
 
 type ReviewCountAggregate {
@@ -617,6 +621,7 @@ input UpdateProductDto {
 
 input ColorDto {
   color: String!
+  title: String!
 }
 
 input ReviewDto {

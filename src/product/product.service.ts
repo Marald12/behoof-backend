@@ -5,14 +5,15 @@ import { UpdateProductDto } from './dto/update-product.dto'
 
 @Injectable()
 export class ProductService {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: PrismaService) {
+	}
 
 	public async create({
-		categoryId,
-		colors,
-		brandId,
-		...dto
-	}: CreateProductDto) {
+												categoryId,
+												colors,
+												brandId,
+												...dto
+											}: CreateProductDto) {
 		return this.prismaService.product.create({
 			data: {
 				...dto,
@@ -68,9 +69,9 @@ export class ProductService {
 				price:
 					minPrice !== undefined || maxPrice !== undefined
 						? {
-								...(minPrice !== undefined ? { gte: minPrice } : {}),
-								...(maxPrice !== undefined ? { lte: maxPrice } : {})
-							}
+							...(minPrice !== undefined ? { gte: minPrice } : {}),
+							...(maxPrice !== undefined ? { lte: maxPrice } : {})
+						}
 						: undefined,
 				AND: [
 					battery
@@ -78,8 +79,8 @@ export class ProductService {
 						: {},
 					memory
 						? {
-								characteristics: { path: ['memory'], array_contains: [memory] }
-							}
+							characteristics: { path: ['memory'], array_contains: [memory] }
+						}
 						: {},
 					screen
 						? { characteristics: { path: ['displayCount'], equals: screen } }
@@ -89,11 +90,11 @@ export class ProductService {
 						: {},
 					portabilityCount
 						? {
-								characteristics: {
-									path: ['portabilityCount'],
-									equals: portabilityCount
-								}
+							characteristics: {
+								path: ['portabilityCount'],
+								equals: portabilityCount
 							}
+						}
 						: {}
 				].filter(condition => Object.keys(condition).length > 0)
 			},
@@ -143,7 +144,12 @@ export class ProductService {
 			include: {
 				brand: true,
 				category: true,
-				colors: true
+				colors: true,
+				reviews: {
+					include: {
+						user: true
+					}
+				}
 			}
 		})
 	}

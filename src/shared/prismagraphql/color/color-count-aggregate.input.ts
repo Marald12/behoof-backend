@@ -11,5 +11,8 @@ export class ColorCountAggregateInput {
     color?: true;
 
     @Field(() => Boolean, {nullable:true})
+    title?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

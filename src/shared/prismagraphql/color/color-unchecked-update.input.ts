@@ -12,6 +12,9 @@ export class ColorUncheckedUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     color?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    title?: StringFieldUpdateOperationsInput;
+
     @Field(() => ProductUncheckedUpdateManyWithoutColorsNestedInput, {nullable:true})
     products?: ProductUncheckedUpdateManyWithoutColorsNestedInput;
 }

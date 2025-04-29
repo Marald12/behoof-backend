@@ -12,5 +12,8 @@ export class ColorCountAggregate {
     color!: number;
 
     @Field(() => Int, {nullable:false})
+    title!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

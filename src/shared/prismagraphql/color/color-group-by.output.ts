@@ -13,6 +13,9 @@ export class ColorGroupBy {
     @Field(() => String, {nullable:false})
     color!: string;
 
+    @Field(() => String, {nullable:false})
+    title!: string;
+
     @Field(() => ColorCountAggregate, {nullable:true})
     _count?: ColorCountAggregate;
 

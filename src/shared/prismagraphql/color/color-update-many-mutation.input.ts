@@ -10,4 +10,7 @@ export class ColorUpdateManyMutationInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     color?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    title?: StringFieldUpdateOperationsInput;
 }

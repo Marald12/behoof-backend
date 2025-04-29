@@ -9,4 +9,7 @@ export class ColorMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     color?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    title?: true;
 }
