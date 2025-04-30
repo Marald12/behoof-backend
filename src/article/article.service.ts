@@ -5,7 +5,8 @@ import { ArticleWhereInput } from '../shared/prismagraphql/article'
 
 @Injectable()
 export class ArticleService {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: PrismaService) {
+	}
 
 	public async create(userId: string, dto: CreateArticleDto) {
 		return this.prismaService.article.create({
@@ -27,7 +28,7 @@ export class ArticleService {
 		skip?: number,
 		search?: string,
 		categoryId?: string,
-		tag?: string
+		tag?: string[]
 	) {
 		const whereConditions: ArticleWhereInput = {}
 
@@ -44,8 +45,8 @@ export class ArticleService {
 
 		if (tag) {
 			whereConditions.OR = whereConditions.OR
-				? [...whereConditions.OR, { tags: { has: tag } }]
-				: [{ tags: { has: tag } }]
+				? [...whereConditions.OR, { tags: { hasSome: tag } }]
+				: [{ tags: { hasSome: tag } }]
 		}
 
 		if (categoryId) {
@@ -64,6 +65,9 @@ export class ArticleService {
 					}
 				}
 			},
+			orderBy: {
+				viewsCount: 'desc'
+			},
 			skip,
 			take
 		})
@@ -71,7 +75,18 @@ export class ArticleService {
 
 	public async findById(id: string) {
 		const article = await this.prismaService.article.findUnique({
+			where: { id }
+		})
+		if (!article) throw new NotFoundException('Пост не найден.')
+
+
+		return this.prismaService.article.update({
 			where: { id },
+			data: {
+				viewsCount: {
+					increment: 1
+				}
+			},
 			include: {
 				content: true,
 				user: true,
@@ -83,8 +98,5 @@ export class ArticleService {
 				}
 			}
 		})
-		if (!article) throw new NotFoundException('Пост не найден.')
-
-		return article
 	}
 }

@@ -7,7 +7,8 @@ import { CurrentUser } from '../user/user.decorator'
 
 @Resolver()
 export class ArticleResolver {
-	constructor(private readonly articleService: ArticleService) {}
+	constructor(private readonly articleService: ArticleService) {
+	}
 
 	@Mutation(() => Article)
 	@Auth()
@@ -26,7 +27,8 @@ export class ArticleResolver {
 		@Args('categoryId', { nullable: true }) categoryId?: string,
 		@Args('tag', { nullable: true }) tag?: string
 	) {
-		return this.articleService.findAll(take, skip, search, categoryId, tag)
+		const tags = tag ? tag!.split(',') : undefined
+		return this.articleService.findAll(take, skip, search, categoryId, tags)
 	}
 
 	@Query(() => Article)

@@ -193,7 +193,8 @@ export class ProductService {
 			},
 			include: {
 				category: true,
-				brand: true
+				brand: true,
+				colors: true
 			},
 			take: 5,
 			orderBy: {

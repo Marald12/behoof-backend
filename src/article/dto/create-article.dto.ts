@@ -1,12 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import {
-	ArrayNotEmpty,
-	IsArray,
-	IsEnum,
-	IsNotEmpty,
-	IsOptional,
-	IsString
-} from 'class-validator'
+import { ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 enum ContentTypes {
 	LIST = 'LIST',
