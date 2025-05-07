@@ -49,7 +49,11 @@ export class UserService {
 				questions: true,
 				reviews: true,
 				articles: true,
-				favoriteProducts: true,
+				favoriteProducts: {
+					include: {
+						category: true
+					}
+				},
 				comments: true
 			}
 		})

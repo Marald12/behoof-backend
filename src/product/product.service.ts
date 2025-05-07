@@ -159,6 +159,11 @@ export class ProductService {
 			orderBy: {
 				viewsCount: 'desc'
 			},
+			include: {
+				category: true,
+				brand: true,
+				colors: true
+			},
 			take: 10
 		})
 	}
