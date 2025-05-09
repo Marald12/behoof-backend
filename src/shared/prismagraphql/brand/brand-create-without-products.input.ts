@@ -1,6 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { CategoryCreateNestedOneWithoutBrandsInput } from '../category/category-create-nested-one-without-brands.input';
+import { CategoryCreateNestedManyWithoutBrandsInput } from '../category/category-create-nested-many-without-brands.input';
 
 @InputType()
 export class BrandCreateWithoutProductsInput {
@@ -17,6 +17,6 @@ export class BrandCreateWithoutProductsInput {
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
 
-    @Field(() => CategoryCreateNestedOneWithoutBrandsInput, {nullable:false})
-    category!: CategoryCreateNestedOneWithoutBrandsInput;
+    @Field(() => CategoryCreateNestedManyWithoutBrandsInput, {nullable:true})
+    categories?: CategoryCreateNestedManyWithoutBrandsInput;
 }

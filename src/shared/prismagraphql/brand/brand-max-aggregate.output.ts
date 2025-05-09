@@ -10,9 +10,6 @@ export class BrandMaxAggregate {
     @Field(() => String, {nullable:true})
     title?: string;
 
-    @Field(() => String, {nullable:true})
-    categoryId?: string;
-
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

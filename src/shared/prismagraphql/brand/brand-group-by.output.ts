@@ -13,9 +13,6 @@ export class BrandGroupBy {
     @Field(() => String, {nullable:false})
     title!: string;
 
-    @Field(() => String, {nullable:false})
-    categoryId!: string;
-
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

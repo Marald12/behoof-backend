@@ -11,9 +11,6 @@ export class BrandCountAggregateInput {
     title?: true;
 
     @Field(() => Boolean, {nullable:true})
-    categoryId?: true;
-
-    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

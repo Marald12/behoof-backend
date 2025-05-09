@@ -4,18 +4,19 @@ import { BrandDto } from './brand.dto'
 
 @Injectable()
 export class BrandService {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: PrismaService) {
+	}
 
-	public async create({ title, categoryId }: BrandDto) {
+	public async create({ title, categories }: BrandDto) {
 		return this.prismaService.brand.create({
-			data: { title, category: { connect: { id: categoryId } } }
+			data: { title, categories: { connect: categories.map(id => ({ id })) } }
 		})
 	}
 
 	public async findAll() {
 		return this.prismaService.brand.findMany({
 			include: {
-				category: true,
+				categories: true,
 				products: true
 			}
 		})
@@ -27,7 +28,7 @@ export class BrandService {
 				id
 			},
 			include: {
-				category: true,
+				categories: true,
 				products: true
 			}
 		})

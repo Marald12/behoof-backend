@@ -12,9 +12,6 @@ export class BrandCountOrderByAggregateInput {
     title?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})
-    categoryId?: `${SortOrder}`;
-
-    @Field(() => SortOrder, {nullable:true})
     createdAt?: `${SortOrder}`;
 
     @Field(() => SortOrder, {nullable:true})

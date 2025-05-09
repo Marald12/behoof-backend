@@ -137,16 +137,16 @@ type Category {
 }
 
 type BrandCount {
+  categories: Int!
   products: Int!
 }
 
 type Brand {
   id: ID!
   title: String!
-  categoryId: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  category: Category!
+  categories: [Category!]
   products: [Product!]
   _count: BrandCount!
 }
@@ -287,7 +287,6 @@ type CategoryMaxAggregate {
 type BrandCountAggregate {
   id: Int!
   title: Int!
-  categoryId: Int!
   createdAt: Int!
   updatedAt: Int!
   _all: Int!
@@ -296,7 +295,6 @@ type BrandCountAggregate {
 type BrandMinAggregate {
   id: String
   title: String
-  categoryId: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -304,7 +302,6 @@ type BrandMinAggregate {
 type BrandMaxAggregate {
   id: String
   title: String
-  categoryId: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -590,7 +587,7 @@ input CategoryDto {
 
 input BrandDto {
   title: String!
-  categoryId: String!
+  categories: [String!]!
 }
 
 input CreateProductDto {

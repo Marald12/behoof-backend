@@ -12,9 +12,6 @@ export class BrandCountAggregate {
     title!: number;
 
     @Field(() => Int, {nullable:false})
-    categoryId!: number;
-
-    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

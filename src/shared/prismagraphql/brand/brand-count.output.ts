@@ -6,5 +6,8 @@ import { Int } from '@nestjs/graphql';
 export class BrandCount {
 
     @Field(() => Int, {nullable:false})
+    categories?: number;
+
+    @Field(() => Int, {nullable:false})
     products?: number;
 }

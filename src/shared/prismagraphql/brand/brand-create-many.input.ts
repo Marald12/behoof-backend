@@ -10,9 +10,6 @@ export class BrandCreateManyInput {
     @Field(() => String, {nullable:false})
     title!: string;
 
-    @Field(() => String, {nullable:false})
-    categoryId!: string;
-
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

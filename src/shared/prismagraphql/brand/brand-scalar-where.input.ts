@@ -21,9 +21,6 @@ export class BrandScalarWhereInput {
     @Field(() => StringFilter, {nullable:true})
     title?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    categoryId?: StringFilter;
-
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 

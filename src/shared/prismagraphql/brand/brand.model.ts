@@ -14,17 +14,14 @@ export class Brand {
     @Field(() => String, {nullable:false})
     title!: string;
 
-    @Field(() => String, {nullable:false})
-    categoryId!: string;
-
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
 
-    @Field(() => Category, {nullable:false})
-    category?: Category;
+    @Field(() => [Category], {nullable:true})
+    categories?: Array<Category>;
 
     @Field(() => [Product], {nullable:true})
     products?: Array<Product>;
