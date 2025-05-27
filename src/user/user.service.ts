@@ -51,7 +51,9 @@ export class UserService {
 				articles: true,
 				favoriteProducts: {
 					include: {
-						category: true
+						category: true,
+						colors: true,
+						brand: true
 					}
 				},
 				comments: true
