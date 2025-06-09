@@ -518,7 +518,7 @@ type Query {
   getProfile: User!
   findAllCategories: [Category!]!
   findByIdCategory(id: String!): Category!
-  getCategoriesForMenu: [Category!]!
+  getCategoriesForMenu(brandId: String!, categoryId: String!): [Category!]!
   findAllBrands: [Brand!]!
   findBrandById(id: String!): Brand!
   findAllProducts: [Product!]!

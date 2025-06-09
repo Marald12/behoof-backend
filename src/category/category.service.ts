@@ -34,8 +34,8 @@ export class CategoryService {
 		return category
 	}
 
-	public async getForMenu() {
-		return this.prismaService.category.findMany({
+	public async getForMenu(brandId: string, categoryId: string) {
+		const categories = await this.prismaService.category.findMany({
 			include: {
 				brands: {
 					include: {
@@ -44,5 +44,24 @@ export class CategoryService {
 				}
 			}
 		})
+
+		const filteredProducts: any[] = []
+
+		categories.forEach(c =>
+			c.brands.forEach(b => {
+				if (b.id !== brandId) return
+
+				b.products.forEach(p => {
+					if (p.brandId === b.id) filteredProducts.push(p)
+				})
+			})
+		)
+
+		return filteredProducts
+			.filter(i => i.categoryId === categoryId)
+			.filter(
+				(product, index, self) =>
+					index === self.findIndex(p => p.id === product.id)
+			)
 	}
 }

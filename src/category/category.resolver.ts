@@ -23,7 +23,10 @@ export class CategoryResolver {
 	}
 
 	@Query(() => [Category])
-	public getCategoriesForMenu() {
-		return this.categoryService.getForMenu()
+	public getCategoriesForMenu(
+		@Args('brandId') brandId: string,
+		@Args('categoryId') categoryId: string
+	) {
+		return this.categoryService.getForMenu(brandId, categoryId)
 	}
 }
